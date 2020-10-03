@@ -1,0 +1,22 @@
+datasource db {
+    provider = "sqlite"
+    url      = "file:./dev.db"
+}
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+model Lessons {
+    id          Int      @id @default(autoincrement())
+    createdAt   DateTime @default(now())
+    description String
+ //   multimedia  String
+}
+
+// model Multimedia {
+//     id        Int      @id @default(autoincrement())
+//     url       String
+//     createdAt DateTime @default(now())
+
+// }

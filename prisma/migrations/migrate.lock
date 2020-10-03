@@ -1,0 +1,6 @@
+# Prisma Migrate lockfile v1
+
+20201001075851-init
+20201001082224-add-user-model
+20201003101222-watchlistadded
+20201003103314-symboladded
