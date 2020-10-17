@@ -2,7 +2,7 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const { APP_SECRET, getUserId } = require('../utils')
 
-async function post(parent, args, context) {
+async function createLesson(parent, args, context) {
   const userId = getUserId(context);
 
   //https://www.prisma.io/docs/reference/tools-and-interfaces/prisma-client/relation-queries
@@ -95,7 +95,7 @@ async function addToMySymbol(parent, args, context, info) {
 module.exports = {
   signup,
   login,
-  post,
+  createLesson,
   addToMySymbol,
   removeSymbol
 }

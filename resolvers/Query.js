@@ -14,20 +14,7 @@ async function psxMarketWatch(parent, args, context) {
 }
 
 async function info(parent, args, context) {
-
-  const userId = getUserId(context);
-
-  var data = await context.prisma.watchSymbols.findMany({
-    where: {
-      postedById: userId,
-      // symbol: symbol
-    }
-  });
-  if (!data.length) {
-    await context.prisma.watchSymbols
-  }
-  console.log(data.length);
-  return JSON.stringify(data);
+  return "Welcome to Knowledge Repository";
 }
 
 async function watchSymbols(parent, args, context) {
