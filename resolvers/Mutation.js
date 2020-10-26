@@ -20,53 +20,76 @@ async function createLesson(parent, args, context) {
   return { ...lesson, multimedia: [] };
 }
 async function signup(parent, args, context, info) {
+
+  const emailexists = await context.prisma.user.findOne({ where: { email: args.email } });
+  if (emailexists) {
+    throw new Error('email already exists');
+  }
+
   const password = await bcrypt.hash(args.password, 10)
   const user = await context.prisma.user.create({ data: { ...args, password } })
+  console.log(user);
   const token = jwt.sign({ userId: user.id }, APP_SECRET)
   return {
     token,
     user,
   }
+
 }
 
 async function login(parent, args, context, info) {
-  // 1
   const user = await context.prisma.user.findOne({ where: { email: args.email } })
   if (!user) {
     throw new Error('No such user found')
   }
 
-  // 2
   const valid = await bcrypt.compare(args.password, user.password)
   if (!valid) {
-    throw new Error('Invalid password')
+    throw new Error('Invalid username or password')
   }
 
   const token = jwt.sign({ userId: user.id }, APP_SECRET)
 
-  // 3
   return {
     token,
     user,
   }
 }
 
-async function removeSymbol(parent, args, context, info) {
-  const userId = getUserId(context);
-  const symbol = args.symbol;
-
-  var deletedSymbol = await context.prisma.watchSymbols.deleteMany({
+async function removeWatchSymbol(prisma, userId, symbol) {
+  var deletedSymbol = await prisma.watchSymbols.deleteMany({
     where: {
       postedById: userId,
       symbol: symbol
     }
   });
 
-  var symbols = (await context.prisma.user.findOne({ where: { id: userId } }).watchSymbols())
+  var symbols = (await prisma.user.findOne({ where: { id: userId } }).watchSymbols())
   return symbols.map(symbol => symbol.symbol);
 
 }
-async function addToMySymbol(parent, args, context, info) {
+async function addWatchSymbol(prisma, userId, symbol) {
+
+  var data = await prisma.watchSymbols.findMany({
+    where: {
+      postedById: userId,
+      symbol: symbol
+    }
+  });
+  if (!data.length) {
+    await prisma.watchSymbols.create({
+      data: {
+        postedBy: { connect: { id: userId } },
+        symbol: symbol
+      }
+    });
+  }
+
+  var symbols = (await prisma.user.findOne({ where: { id: userId } }).watchSymbols())
+  return symbols.map(symbol => symbol.symbol);
+
+}
+async function switchWatchSymbol(parent, args, context, info) { //if symbol already exists in watch symbols then it will remove/ other wise this will add
   const userId = getUserId(context);
   const symbol = args.symbol;
 
@@ -76,18 +99,11 @@ async function addToMySymbol(parent, args, context, info) {
       symbol: symbol
     }
   });
-  if (!data.length) {
-    await context.prisma.watchSymbols.create({
-      data: {
-        postedBy: { connect: { id: userId } },
-        symbol: symbol
-      }
-    });
-    console.log('add symbol');
+  if (!data.length) { //add watch symbol
+    return await addWatchSymbol(context.prisma, userId, symbol);
+  } else {
+    return await removeWatchSymbol(context.prisma, userId, symbol);
   }
-
-  var symbols = (await context.prisma.user.findOne({ where: { id: userId } }).watchSymbols())
-  return symbols.map(symbol => symbol.symbol);
 
 }
 
@@ -96,6 +112,6 @@ module.exports = {
   signup,
   login,
   createLesson,
-  addToMySymbol,
-  removeSymbol
+  switchWatchSymbol
+ 
 }

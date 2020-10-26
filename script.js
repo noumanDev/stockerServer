@@ -5,4 +5,4 @@ const scraperController = require('./scrapping/pageController');
 let browserInstance = browserObject.startBrowser();
 
 // Pass the browser instance to the scraper controller
-scraperController(browserInstance).then(data=>console.log(data));
+scraperController(browserInstance);//.then(data=>console.log(data));

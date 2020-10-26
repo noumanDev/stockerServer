@@ -1,9 +1,10 @@
+const schema = `
 type Query {
   info: String!
   lessons: [Lesson!]!
   
   psxMarketWatch : [PsxEntity!]!
-  watchSymbols : [String!]!
+  getWatchSymbols : [String!]!
   
 }
 
@@ -18,7 +19,8 @@ type PsxEntity {
     current: String!,
     change: String!,
     changePercentage: String!,
-    volume: String!
+    volume: String!,
+    watch: Boolean!
 }
 
 type Mutation {
@@ -26,8 +28,8 @@ type Mutation {
   signup(email: String!, password: String!, name: String!): AuthPayload
   login(email: String!, password: String!): AuthPayload
 
-  addToMySymbol(symbol:String!):[String!]!
-  removeSymbol(symbol:String!):[String!]!
+  switchWatchSymbol(symbol:String!):[String!]!
+  
 }
 
 
@@ -58,4 +60,5 @@ type User {
   email: String!
   lessons: [Lesson!]!
 }
-
+`
+module.exports = schema;

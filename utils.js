@@ -1,8 +1,11 @@
 const jwt = require('jsonwebtoken')
 const APP_SECRET = 'GraphQL-is-aw3some'
+const {
+  AuthenticationError,
+} = require('apollo-server');
 
 function getUserId(context) {
-  const Authorization = context.request.get('Authorization')
+  const Authorization = context.req.get('Authorization')
   console.log(Authorization);
   if (Authorization) {
     const token = Authorization.replace('Bearer ', '')
@@ -10,7 +13,7 @@ function getUserId(context) {
     return userId
   }
 
-  throw new Error('Not authenticated')
+  throw new AuthenticationError('Not authenticated')
 }
 function removeSpecialCharacters(str){
   return str.replace(/[^a-zA-Z ]/g, "");
