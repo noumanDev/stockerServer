@@ -1,5 +1,5 @@
 const { getUserId } = require('../utils');
-const { scrapePsxMarketWatch } = require('./../scrapping/index');
+const { scrapePsxMarketWatch,psxSymbolStats } = require('./../scrapping/index');
 const _ = require('lodash');
 
 async function lessons(parent, args, context) {
@@ -41,6 +41,18 @@ async function psxMarketWatch(parent, args, context) {
   //sort according to watch symbols
   return _.sortBy(data,[(w)=>!w.watch,(w)=>!w.volume]);
 }
+async function getPsxSymbolStats(parent, args, context) {
+
+  //fetch psx data
+  var psxSymbolStatsKey = "psxSymbolStats"+args.symbol+args.todayOnly;
+  var data = context.myCache.get(psxSymbolStatsKey);
+  if (data == undefined) {
+    data = await psxSymbolStats({today:args.todayOnly,symbol:args.symbol});
+    context.myCache.set(psxSymbolStatsKey,data,60000);
+  }
+
+  return data;
+}
 
 async function info(parent, args, context) {
   return "Welcome to Knowledge Repository";
@@ -52,5 +64,6 @@ module.exports = {
   lessons,
 
   psxMarketWatch,
-  getWatchSymbols
+  getWatchSymbols,
+  getPsxSymbolStats
 };
