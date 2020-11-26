@@ -1,5 +1,5 @@
 To Dos
-    rename table lessons to lesson
+    add email validation
     https://www.howtographql.com/graphql-js/1-getting-started/
 
 Update Database
