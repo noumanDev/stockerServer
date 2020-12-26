@@ -21,7 +21,9 @@ type PsxEntity {
     change: String!,
     changePercentage: String!,
     volume: String!,
-    watch: Boolean!
+    watch: Boolean!,
+    amount: String,
+    phone : String
 }
 
 type Mutation {
