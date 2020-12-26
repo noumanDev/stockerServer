@@ -1,22 +1,48 @@
 datasource db {
     provider = "sqlite"
     url      = "file:./dev.db"
+  
 }
 
 generator client {
     provider = "prisma-client-js"
 }
 
-model Lessons {
-    id          Int      @id @default(autoincrement())
-    createdAt   DateTime @default(now())
+model Lesson {
+    id          Int          @id @default(autoincrement())
+    createdAt   DateTime     @default(now())
     description String
- //   multimedia  String
+    postedById  Int?
+    postedBy    User?        @relation(fields: [postedById], references: [id])
+    multimedia  Multimedia[]
+
 }
 
-// model Multimedia {
-//     id        Int      @id @default(autoincrement())
-//     url       String
-//     createdAt DateTime @default(now())
+model Multimedia {
+    id        Int      @id @default(autoincrement())
+    url       String
+    createdAt DateTime @default(now())
+    lesson    Lesson?  @relation(fields: [lessonId], references: [id])
+    lessonId  Int?
 
-// }
+}
+
+model User {
+    id       Int      @id @default(autoincrement())
+    name     String
+    email    String   @unique
+    password String
+    lessons  Lesson[]
+    watchSymbols WatchSymbols[]
+}
+
+model WatchSymbols {
+    id          Int          @id @default(autoincrement())
+    symbol      String
+    amount      String       @default("")
+    phone       String       @default("")
+    createdAt   DateTime     @default(now())
+    postedById  Int?
+    postedBy    User?        @relation(fields: [postedById], references: [id])
+  
+}

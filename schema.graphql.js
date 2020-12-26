@@ -29,7 +29,7 @@ type Mutation {
   signup(email: String!, password: String!, name: String!): AuthPayload
   login(email: String!, password: String!): AuthPayload
 
-  switchWatchSymbol(symbol:String!):[String!]!
+  switchWatchSymbol(symbol:String!,amount:String!,phone:String!):[String!]!
   
 }
 

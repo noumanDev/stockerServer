@@ -248,7 +248,7 @@ export declare function getLogLevel(log: Array<LogLevel | LogDefinition>): LogLe
  * ```
  * const prisma = new PrismaClient()
  * // Fetch zero or more Lessons
- * const lessons = await prisma.lessons.findMany()
+ * const lessons = await prisma.lesson.findMany()
  * ```
  *
  * 
@@ -299,7 +299,7 @@ export declare class PrismaClient<
    * ```
    * const prisma = new PrismaClient()
    * // Fetch zero or more Lessons
-   * const lessons = await prisma.lessons.findMany()
+   * const lessons = await prisma.lesson.findMany()
    * ```
    *
    * 
@@ -390,14 +390,44 @@ export declare class PrismaClient<
   transaction: PromiseConstructor['all']
 
   /**
-   * `prisma.lessons`: Exposes CRUD operations for the **Lessons** model.
+   * `prisma.lesson`: Exposes CRUD operations for the **Lesson** model.
     * Example usage:
     * ```ts
     * // Fetch zero or more Lessons
-    * const lessons = await prisma.lessons.findMany()
+    * const lessons = await prisma.lesson.findMany()
     * ```
     */
-  get lessons(): LessonsDelegate;
+  get lesson(): LessonDelegate;
+
+  /**
+   * `prisma.multimedia`: Exposes CRUD operations for the **Multimedia** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Multimedias
+    * const multimedias = await prisma.multimedia.findMany()
+    * ```
+    */
+  get multimedia(): MultimediaDelegate;
+
+  /**
+   * `prisma.user`: Exposes CRUD operations for the **User** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Users
+    * const users = await prisma.user.findMany()
+    * ```
+    */
+  get user(): UserDelegate;
+
+  /**
+   * `prisma.watchSymbols`: Exposes CRUD operations for the **WatchSymbols** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more WatchSymbols
+    * const watchSymbols = await prisma.watchSymbols.findMany()
+    * ```
+    */
+  get watchSymbols(): WatchSymbolsDelegate;
 }
 
 
@@ -409,13 +439,46 @@ export declare class PrismaClient<
 // Based on
 // https://github.com/microsoft/TypeScript/issues/3192#issuecomment-261720275
 
-export declare const LessonsDistinctFieldEnum: {
+export declare const LessonDistinctFieldEnum: {
   id: 'id',
   createdAt: 'createdAt',
-  description: 'description'
+  description: 'description',
+  postedById: 'postedById'
 };
 
-export declare type LessonsDistinctFieldEnum = (typeof LessonsDistinctFieldEnum)[keyof typeof LessonsDistinctFieldEnum]
+export declare type LessonDistinctFieldEnum = (typeof LessonDistinctFieldEnum)[keyof typeof LessonDistinctFieldEnum]
+
+
+export declare const MultimediaDistinctFieldEnum: {
+  id: 'id',
+  url: 'url',
+  createdAt: 'createdAt',
+  lessonId: 'lessonId'
+};
+
+export declare type MultimediaDistinctFieldEnum = (typeof MultimediaDistinctFieldEnum)[keyof typeof MultimediaDistinctFieldEnum]
+
+
+export declare const UserDistinctFieldEnum: {
+  id: 'id',
+  name: 'name',
+  email: 'email',
+  password: 'password'
+};
+
+export declare type UserDistinctFieldEnum = (typeof UserDistinctFieldEnum)[keyof typeof UserDistinctFieldEnum]
+
+
+export declare const WatchSymbolsDistinctFieldEnum: {
+  id: 'id',
+  symbol: 'symbol',
+  amount: 'amount',
+  phone: 'phone',
+  createdAt: 'createdAt',
+  postedById: 'postedById'
+};
+
+export declare type WatchSymbolsDistinctFieldEnum = (typeof WatchSymbolsDistinctFieldEnum)[keyof typeof WatchSymbolsDistinctFieldEnum]
 
 
 export declare const SortOrder: {
@@ -428,189 +491,215 @@ export declare type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
 
 
 /**
- * Model Lessons
+ * Model Lesson
  */
 
-export type Lessons = {
+export type Lesson = {
   id: number
   createdAt: Date
   description: string
+  postedById: number | null
 }
 
 
-export type AggregateLessons = {
+export type AggregateLesson = {
   count: number
-  avg: LessonsAvgAggregateOutputType | null
-  sum: LessonsSumAggregateOutputType | null
-  min: LessonsMinAggregateOutputType | null
-  max: LessonsMaxAggregateOutputType | null
+  avg: LessonAvgAggregateOutputType | null
+  sum: LessonSumAggregateOutputType | null
+  min: LessonMinAggregateOutputType | null
+  max: LessonMaxAggregateOutputType | null
 }
 
-export type LessonsAvgAggregateOutputType = {
+export type LessonAvgAggregateOutputType = {
   id: number
+  postedById: number | null
 }
 
-export type LessonsSumAggregateOutputType = {
+export type LessonSumAggregateOutputType = {
   id: number
+  postedById: number | null
 }
 
-export type LessonsMinAggregateOutputType = {
+export type LessonMinAggregateOutputType = {
   id: number
+  postedById: number | null
 }
 
-export type LessonsMaxAggregateOutputType = {
+export type LessonMaxAggregateOutputType = {
   id: number
+  postedById: number | null
 }
 
 
-export type LessonsAvgAggregateInputType = {
+export type LessonAvgAggregateInputType = {
   id?: true
+  postedById?: true
 }
 
-export type LessonsSumAggregateInputType = {
+export type LessonSumAggregateInputType = {
   id?: true
+  postedById?: true
 }
 
-export type LessonsMinAggregateInputType = {
+export type LessonMinAggregateInputType = {
   id?: true
+  postedById?: true
 }
 
-export type LessonsMaxAggregateInputType = {
+export type LessonMaxAggregateInputType = {
   id?: true
+  postedById?: true
 }
 
-export type AggregateLessonsArgs = {
-  where?: LessonsWhereInput
-  orderBy?: Enumerable<LessonsOrderByInput> | LessonsOrderByInput
-  cursor?: LessonsWhereUniqueInput
+export type AggregateLessonArgs = {
+  where?: LessonWhereInput
+  orderBy?: Enumerable<LessonOrderByInput> | LessonOrderByInput
+  cursor?: LessonWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Enumerable<LessonsDistinctFieldEnum>
+  distinct?: Enumerable<LessonDistinctFieldEnum>
   count?: true
-  avg?: LessonsAvgAggregateInputType
-  sum?: LessonsSumAggregateInputType
-  min?: LessonsMinAggregateInputType
-  max?: LessonsMaxAggregateInputType
+  avg?: LessonAvgAggregateInputType
+  sum?: LessonSumAggregateInputType
+  min?: LessonMinAggregateInputType
+  max?: LessonMaxAggregateInputType
 }
 
-export type GetLessonsAggregateType<T extends AggregateLessonsArgs> = {
-  [P in keyof T]: P extends 'count' ? number : GetLessonsAggregateScalarType<T[P]>
+export type GetLessonAggregateType<T extends AggregateLessonArgs> = {
+  [P in keyof T]: P extends 'count' ? number : GetLessonAggregateScalarType<T[P]>
 }
 
-export type GetLessonsAggregateScalarType<T extends any> = {
-  [P in keyof T]: P extends keyof LessonsAvgAggregateOutputType ? LessonsAvgAggregateOutputType[P] : never
+export type GetLessonAggregateScalarType<T extends any> = {
+  [P in keyof T]: P extends keyof LessonAvgAggregateOutputType ? LessonAvgAggregateOutputType[P] : never
 }
     
     
 
-export type LessonsSelect = {
+export type LessonSelect = {
   id?: boolean
   createdAt?: boolean
   description?: boolean
+  postedById?: boolean
+  postedBy?: boolean | UserArgs
+  multimedia?: boolean | FindManyMultimediaArgs
 }
 
-export type LessonsGetPayload<
-  S extends boolean | null | undefined | LessonsArgs,
+export type LessonInclude = {
+  postedBy?: boolean | UserArgs
+  multimedia?: boolean | FindManyMultimediaArgs
+}
+
+export type LessonGetPayload<
+  S extends boolean | null | undefined | LessonArgs,
   U = keyof S
 > = S extends true
-  ? Lessons
+  ? Lesson
   : S extends undefined
   ? never
-  : S extends LessonsArgs | FindManyLessonsArgs
+  : S extends LessonArgs | FindManyLessonArgs
   ? 'include' extends U
-    ? Lessons 
+    ? Lesson  & {
+      [P in TrueKeys<S['include']>]:
+      P extends 'postedBy'
+      ? UserGetPayload<S['include'][P]> | null :
+      P extends 'multimedia'
+      ? Array<MultimediaGetPayload<S['include'][P]>> : never
+    }
   : 'select' extends U
     ? {
-      [P in TrueKeys<S['select']>]:P extends keyof Lessons ? Lessons[P]
+      [P in TrueKeys<S['select']>]:P extends keyof Lesson ? Lesson[P]
 : 
- never
+      P extends 'postedBy'
+      ? UserGetPayload<S['select'][P]> | null :
+      P extends 'multimedia'
+      ? Array<MultimediaGetPayload<S['select'][P]>> : never
     }
-  : Lessons
-: Lessons
+  : Lesson
+: Lesson
 
 
-export interface LessonsDelegate {
+export interface LessonDelegate {
   /**
-   * Find zero or one Lessons that matches the filter.
-   * @param {FindOneLessonsArgs} args - Arguments to find a Lessons
+   * Find zero or one Lesson that matches the filter.
+   * @param {FindOneLessonArgs} args - Arguments to find a Lesson
    * @example
-   * // Get one Lessons
-   * const lessons = await prisma.lessons.findOne({
+   * // Get one Lesson
+   * const lesson = await prisma.lesson.findOne({
    *   where: {
    *     // ... provide filter here
    *   }
    * })
   **/
-  findOne<T extends FindOneLessonsArgs>(
-    args: Subset<T, FindOneLessonsArgs>
-  ): CheckSelect<T, Prisma__LessonsClient<Lessons | null>, Prisma__LessonsClient<LessonsGetPayload<T> | null>>
+  findOne<T extends FindOneLessonArgs>(
+    args: Subset<T, FindOneLessonArgs>
+  ): CheckSelect<T, Prisma__LessonClient<Lesson | null>, Prisma__LessonClient<LessonGetPayload<T> | null>>
   /**
-   * Find the first Lessons that matches the filter.
-   * @param {FindFirstLessonsArgs} args - Arguments to find a Lessons
+   * Find the first Lesson that matches the filter.
+   * @param {FindFirstLessonArgs} args - Arguments to find a Lesson
    * @example
-   * // Get one Lessons
-   * const lessons = await prisma.lessons.findFirst({
+   * // Get one Lesson
+   * const lesson = await prisma.lesson.findFirst({
    *   where: {
    *     // ... provide filter here
    *   }
    * })
   **/
-  findFirst<T extends FindFirstLessonsArgs>(
-    args: Subset<T, FindFirstLessonsArgs>
-  ): CheckSelect<T, Prisma__LessonsClient<Lessons>, Prisma__LessonsClient<LessonsGetPayload<T>>>
+  findFirst<T extends FindFirstLessonArgs>(
+    args: Subset<T, FindFirstLessonArgs>
+  ): CheckSelect<T, Prisma__LessonClient<Lesson>, Prisma__LessonClient<LessonGetPayload<T>>>
   /**
    * Find zero or more Lessons that matches the filter.
-   * @param {FindManyLessonsArgs=} args - Arguments to filter and select certain fields only.
+   * @param {FindManyLessonArgs=} args - Arguments to filter and select certain fields only.
    * @example
    * // Get all Lessons
-   * const lessons = await prisma.lessons.findMany()
+   * const lessons = await prisma.lesson.findMany()
    * 
    * // Get first 10 Lessons
-   * const lessons = await prisma.lessons.findMany({ take: 10 })
+   * const lessons = await prisma.lesson.findMany({ take: 10 })
    * 
    * // Only select the `id`
-   * const lessonsWithIdOnly = await prisma.lessons.findMany({ select: { id: true } })
+   * const lessonWithIdOnly = await prisma.lesson.findMany({ select: { id: true } })
    * 
   **/
-  findMany<T extends FindManyLessonsArgs>(
-    args?: Subset<T, FindManyLessonsArgs>
-  ): CheckSelect<T, Promise<Array<Lessons>>, Promise<Array<LessonsGetPayload<T>>>>
+  findMany<T extends FindManyLessonArgs>(
+    args?: Subset<T, FindManyLessonArgs>
+  ): CheckSelect<T, Promise<Array<Lesson>>, Promise<Array<LessonGetPayload<T>>>>
   /**
-   * Create a Lessons.
-   * @param {LessonsCreateArgs} args - Arguments to create a Lessons.
+   * Create a Lesson.
+   * @param {LessonCreateArgs} args - Arguments to create a Lesson.
    * @example
-   * // Create one Lessons
-   * const Lessons = await prisma.lessons.create({
+   * // Create one Lesson
+   * const Lesson = await prisma.lesson.create({
    *   data: {
-   *     // ... data to create a Lessons
+   *     // ... data to create a Lesson
    *   }
    * })
    * 
   **/
-  create<T extends LessonsCreateArgs>(
-    args: Subset<T, LessonsCreateArgs>
-  ): CheckSelect<T, Prisma__LessonsClient<Lessons>, Prisma__LessonsClient<LessonsGetPayload<T>>>
+  create<T extends LessonCreateArgs>(
+    args: Subset<T, LessonCreateArgs>
+  ): CheckSelect<T, Prisma__LessonClient<Lesson>, Prisma__LessonClient<LessonGetPayload<T>>>
   /**
-   * Delete a Lessons.
-   * @param {LessonsDeleteArgs} args - Arguments to delete one Lessons.
+   * Delete a Lesson.
+   * @param {LessonDeleteArgs} args - Arguments to delete one Lesson.
    * @example
-   * // Delete one Lessons
-   * const Lessons = await prisma.lessons.delete({
+   * // Delete one Lesson
+   * const Lesson = await prisma.lesson.delete({
    *   where: {
-   *     // ... filter to delete one Lessons
+   *     // ... filter to delete one Lesson
    *   }
    * })
    * 
   **/
-  delete<T extends LessonsDeleteArgs>(
-    args: Subset<T, LessonsDeleteArgs>
-  ): CheckSelect<T, Prisma__LessonsClient<Lessons>, Prisma__LessonsClient<LessonsGetPayload<T>>>
+  delete<T extends LessonDeleteArgs>(
+    args: Subset<T, LessonDeleteArgs>
+  ): CheckSelect<T, Prisma__LessonClient<Lesson>, Prisma__LessonClient<LessonGetPayload<T>>>
   /**
-   * Update one Lessons.
-   * @param {LessonsUpdateArgs} args - Arguments to update one Lessons.
+   * Update one Lesson.
+   * @param {LessonUpdateArgs} args - Arguments to update one Lesson.
    * @example
-   * // Update one Lessons
-   * const lessons = await prisma.lessons.update({
+   * // Update one Lesson
+   * const lesson = await prisma.lesson.update({
    *   where: {
    *     // ... provide filter here
    *   },
@@ -620,30 +709,30 @@ export interface LessonsDelegate {
    * })
    * 
   **/
-  update<T extends LessonsUpdateArgs>(
-    args: Subset<T, LessonsUpdateArgs>
-  ): CheckSelect<T, Prisma__LessonsClient<Lessons>, Prisma__LessonsClient<LessonsGetPayload<T>>>
+  update<T extends LessonUpdateArgs>(
+    args: Subset<T, LessonUpdateArgs>
+  ): CheckSelect<T, Prisma__LessonClient<Lesson>, Prisma__LessonClient<LessonGetPayload<T>>>
   /**
    * Delete zero or more Lessons.
-   * @param {LessonsDeleteManyArgs} args - Arguments to filter Lessons to delete.
+   * @param {LessonDeleteManyArgs} args - Arguments to filter Lessons to delete.
    * @example
    * // Delete a few Lessons
-   * const { count } = await prisma.lessons.deleteMany({
+   * const { count } = await prisma.lesson.deleteMany({
    *   where: {
    *     // ... provide filter here
    *   }
    * })
    * 
   **/
-  deleteMany<T extends LessonsDeleteManyArgs>(
-    args: Subset<T, LessonsDeleteManyArgs>
+  deleteMany<T extends LessonDeleteManyArgs>(
+    args: Subset<T, LessonDeleteManyArgs>
   ): Promise<BatchPayload>
   /**
    * Update zero or more Lessons.
-   * @param {LessonsUpdateManyArgs} args - Arguments to update one or more rows.
+   * @param {LessonUpdateManyArgs} args - Arguments to update one or more rows.
    * @example
    * // Update many Lessons
-   * const lessons = await prisma.lessons.updateMany({
+   * const lesson = await prisma.lesson.updateMany({
    *   where: {
    *     // ... provide filter here
    *   },
@@ -653,47 +742,47 @@ export interface LessonsDelegate {
    * })
    * 
   **/
-  updateMany<T extends LessonsUpdateManyArgs>(
-    args: Subset<T, LessonsUpdateManyArgs>
+  updateMany<T extends LessonUpdateManyArgs>(
+    args: Subset<T, LessonUpdateManyArgs>
   ): Promise<BatchPayload>
   /**
-   * Create or update one Lessons.
-   * @param {LessonsUpsertArgs} args - Arguments to update or create a Lessons.
+   * Create or update one Lesson.
+   * @param {LessonUpsertArgs} args - Arguments to update or create a Lesson.
    * @example
-   * // Update or create a Lessons
-   * const lessons = await prisma.lessons.upsert({
+   * // Update or create a Lesson
+   * const lesson = await prisma.lesson.upsert({
    *   create: {
-   *     // ... data to create a Lessons
+   *     // ... data to create a Lesson
    *   },
    *   update: {
    *     // ... in case it already exists, update
    *   },
    *   where: {
-   *     // ... the filter for the Lessons we want to update
+   *     // ... the filter for the Lesson we want to update
    *   }
    * })
   **/
-  upsert<T extends LessonsUpsertArgs>(
-    args: Subset<T, LessonsUpsertArgs>
-  ): CheckSelect<T, Prisma__LessonsClient<Lessons>, Prisma__LessonsClient<LessonsGetPayload<T>>>
+  upsert<T extends LessonUpsertArgs>(
+    args: Subset<T, LessonUpsertArgs>
+  ): CheckSelect<T, Prisma__LessonClient<Lesson>, Prisma__LessonClient<LessonGetPayload<T>>>
   /**
    * Count
    */
-  count(args?: Omit<FindManyLessonsArgs, 'select' | 'include'>): Promise<number>
+  count(args?: Omit<FindManyLessonArgs, 'select' | 'include'>): Promise<number>
 
   /**
    * Aggregate
    */
-  aggregate<T extends AggregateLessonsArgs>(args: Subset<T, AggregateLessonsArgs>): Promise<GetLessonsAggregateType<T>>
+  aggregate<T extends AggregateLessonArgs>(args: Subset<T, AggregateLessonArgs>): Promise<GetLessonAggregateType<T>>
 }
 
 /**
- * The delegate class that acts as a "Promise-like" for Lessons.
+ * The delegate class that acts as a "Promise-like" for Lesson.
  * Why is this prefixed with `Prisma__`?
  * Because we want to prevent naming conflicts as mentioned in 
  * https://github.com/prisma/prisma-client-js/issues/707
  */
-export declare class Prisma__LessonsClient<T> implements Promise<T> {
+export declare class Prisma__LessonClient<T> implements Promise<T> {
   private readonly _dmmf;
   private readonly _fetcher;
   private readonly _queryType;
@@ -709,6 +798,9 @@ export declare class Prisma__LessonsClient<T> implements Promise<T> {
   constructor(_dmmf: DMMFClass, _fetcher: PrismaClientFetcher, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
   readonly [Symbol.toStringTag]: 'PrismaClientPromise';
 
+  postedBy<T extends UserArgs = {}>(args?: Subset<T, UserArgs>): CheckSelect<T, Prisma__UserClient<User | null>, Prisma__UserClient<UserGetPayload<T> | null>>;
+
+  multimedia<T extends FindManyMultimediaArgs = {}>(args?: Subset<T, FindManyMultimediaArgs>): CheckSelect<T, Promise<Array<Multimedia>>, Promise<Array<MultimediaGetPayload<T>>>>;
 
   private get _document();
   /**
@@ -736,60 +828,72 @@ export declare class Prisma__LessonsClient<T> implements Promise<T> {
 // Custom InputTypes
 
 /**
- * Lessons findOne
+ * Lesson findOne
  */
-export type FindOneLessonsArgs = {
+export type FindOneLessonArgs = {
   /**
-   * Select specific fields to fetch from the Lessons
+   * Select specific fields to fetch from the Lesson
   **/
-  select?: LessonsSelect | null
+  select?: LessonSelect | null
   /**
-   * Filter, which Lessons to fetch.
+   * Choose, which related nodes to fetch as well.
   **/
-  where: LessonsWhereUniqueInput
+  include?: LessonInclude | null
+  /**
+   * Filter, which Lesson to fetch.
+  **/
+  where: LessonWhereUniqueInput
 }
 
 
 /**
- * Lessons findFirst
+ * Lesson findFirst
  */
-export type FindFirstLessonsArgs = {
+export type FindFirstLessonArgs = {
   /**
-   * Select specific fields to fetch from the Lessons
+   * Select specific fields to fetch from the Lesson
   **/
-  select?: LessonsSelect | null
+  select?: LessonSelect | null
   /**
-   * Filter, which Lessons to fetch.
+   * Choose, which related nodes to fetch as well.
   **/
-  where?: LessonsWhereInput
-  orderBy?: Enumerable<LessonsOrderByInput> | LessonsOrderByInput
-  cursor?: LessonsWhereUniqueInput
+  include?: LessonInclude | null
+  /**
+   * Filter, which Lesson to fetch.
+  **/
+  where?: LessonWhereInput
+  orderBy?: Enumerable<LessonOrderByInput> | LessonOrderByInput
+  cursor?: LessonWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Enumerable<LessonsDistinctFieldEnum>
+  distinct?: Enumerable<LessonDistinctFieldEnum>
 }
 
 
 /**
- * Lessons findMany
+ * Lesson findMany
  */
-export type FindManyLessonsArgs = {
+export type FindManyLessonArgs = {
   /**
-   * Select specific fields to fetch from the Lessons
+   * Select specific fields to fetch from the Lesson
   **/
-  select?: LessonsSelect | null
+  select?: LessonSelect | null
+  /**
+   * Choose, which related nodes to fetch as well.
+  **/
+  include?: LessonInclude | null
   /**
    * Filter, which Lessons to fetch.
   **/
-  where?: LessonsWhereInput
+  where?: LessonWhereInput
   /**
    * Determine the order of the Lessons to fetch.
   **/
-  orderBy?: Enumerable<LessonsOrderByInput> | LessonsOrderByInput
+  orderBy?: Enumerable<LessonOrderByInput> | LessonOrderByInput
   /**
    * Sets the position for listing Lessons.
   **/
-  cursor?: LessonsWhereUniqueInput
+  cursor?: LessonWhereUniqueInput
   /**
    * The number of Lessons to fetch. If negative number, it will take Lessons before the `cursor`.
   **/
@@ -798,107 +902,1718 @@ export type FindManyLessonsArgs = {
    * Skip the first `n` Lessons.
   **/
   skip?: number
-  distinct?: Enumerable<LessonsDistinctFieldEnum>
+  distinct?: Enumerable<LessonDistinctFieldEnum>
 }
 
 
 /**
- * Lessons create
+ * Lesson create
  */
-export type LessonsCreateArgs = {
+export type LessonCreateArgs = {
   /**
-   * Select specific fields to fetch from the Lessons
+   * Select specific fields to fetch from the Lesson
   **/
-  select?: LessonsSelect | null
+  select?: LessonSelect | null
   /**
-   * The data needed to create a Lessons.
+   * Choose, which related nodes to fetch as well.
   **/
-  data: LessonsCreateInput
+  include?: LessonInclude | null
+  /**
+   * The data needed to create a Lesson.
+  **/
+  data: LessonCreateInput
 }
 
 
 /**
- * Lessons update
+ * Lesson update
  */
-export type LessonsUpdateArgs = {
+export type LessonUpdateArgs = {
   /**
-   * Select specific fields to fetch from the Lessons
+   * Select specific fields to fetch from the Lesson
   **/
-  select?: LessonsSelect | null
+  select?: LessonSelect | null
   /**
-   * The data needed to update a Lessons.
+   * Choose, which related nodes to fetch as well.
   **/
-  data: LessonsUpdateInput
+  include?: LessonInclude | null
   /**
-   * Choose, which Lessons to update.
+   * The data needed to update a Lesson.
   **/
-  where: LessonsWhereUniqueInput
+  data: LessonUpdateInput
+  /**
+   * Choose, which Lesson to update.
+  **/
+  where: LessonWhereUniqueInput
 }
 
 
 /**
- * Lessons updateMany
+ * Lesson updateMany
  */
-export type LessonsUpdateManyArgs = {
-  data: LessonsUpdateManyMutationInput
-  where?: LessonsWhereInput
+export type LessonUpdateManyArgs = {
+  data: LessonUpdateManyMutationInput
+  where?: LessonWhereInput
 }
 
 
 /**
- * Lessons upsert
+ * Lesson upsert
  */
-export type LessonsUpsertArgs = {
+export type LessonUpsertArgs = {
   /**
-   * Select specific fields to fetch from the Lessons
+   * Select specific fields to fetch from the Lesson
   **/
-  select?: LessonsSelect | null
+  select?: LessonSelect | null
   /**
-   * The filter to search for the Lessons to update in case it exists.
+   * Choose, which related nodes to fetch as well.
   **/
-  where: LessonsWhereUniqueInput
+  include?: LessonInclude | null
   /**
-   * In case the Lessons found by the `where` argument doesn't exist, create a new Lessons with this data.
+   * The filter to search for the Lesson to update in case it exists.
   **/
-  create: LessonsCreateInput
+  where: LessonWhereUniqueInput
   /**
-   * In case the Lessons was found with the provided `where` argument, update it with this data.
+   * In case the Lesson found by the `where` argument doesn't exist, create a new Lesson with this data.
   **/
-  update: LessonsUpdateInput
+  create: LessonCreateInput
+  /**
+   * In case the Lesson was found with the provided `where` argument, update it with this data.
+  **/
+  update: LessonUpdateInput
 }
 
 
 /**
- * Lessons delete
+ * Lesson delete
  */
-export type LessonsDeleteArgs = {
+export type LessonDeleteArgs = {
   /**
-   * Select specific fields to fetch from the Lessons
+   * Select specific fields to fetch from the Lesson
   **/
-  select?: LessonsSelect | null
+  select?: LessonSelect | null
   /**
-   * Filter which Lessons to delete.
+   * Choose, which related nodes to fetch as well.
   **/
-  where: LessonsWhereUniqueInput
+  include?: LessonInclude | null
+  /**
+   * Filter which Lesson to delete.
+  **/
+  where: LessonWhereUniqueInput
 }
 
 
 /**
- * Lessons deleteMany
+ * Lesson deleteMany
  */
-export type LessonsDeleteManyArgs = {
-  where?: LessonsWhereInput
+export type LessonDeleteManyArgs = {
+  where?: LessonWhereInput
 }
 
 
 /**
- * Lessons without action
+ * Lesson without action
  */
-export type LessonsArgs = {
+export type LessonArgs = {
   /**
-   * Select specific fields to fetch from the Lessons
+   * Select specific fields to fetch from the Lesson
   **/
-  select?: LessonsSelect | null
+  select?: LessonSelect | null
+  /**
+   * Choose, which related nodes to fetch as well.
+  **/
+  include?: LessonInclude | null
+}
+
+
+
+/**
+ * Model Multimedia
+ */
+
+export type Multimedia = {
+  id: number
+  url: string
+  createdAt: Date
+  lessonId: number | null
+}
+
+
+export type AggregateMultimedia = {
+  count: number
+  avg: MultimediaAvgAggregateOutputType | null
+  sum: MultimediaSumAggregateOutputType | null
+  min: MultimediaMinAggregateOutputType | null
+  max: MultimediaMaxAggregateOutputType | null
+}
+
+export type MultimediaAvgAggregateOutputType = {
+  id: number
+  lessonId: number | null
+}
+
+export type MultimediaSumAggregateOutputType = {
+  id: number
+  lessonId: number | null
+}
+
+export type MultimediaMinAggregateOutputType = {
+  id: number
+  lessonId: number | null
+}
+
+export type MultimediaMaxAggregateOutputType = {
+  id: number
+  lessonId: number | null
+}
+
+
+export type MultimediaAvgAggregateInputType = {
+  id?: true
+  lessonId?: true
+}
+
+export type MultimediaSumAggregateInputType = {
+  id?: true
+  lessonId?: true
+}
+
+export type MultimediaMinAggregateInputType = {
+  id?: true
+  lessonId?: true
+}
+
+export type MultimediaMaxAggregateInputType = {
+  id?: true
+  lessonId?: true
+}
+
+export type AggregateMultimediaArgs = {
+  where?: MultimediaWhereInput
+  orderBy?: Enumerable<MultimediaOrderByInput> | MultimediaOrderByInput
+  cursor?: MultimediaWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Enumerable<MultimediaDistinctFieldEnum>
+  count?: true
+  avg?: MultimediaAvgAggregateInputType
+  sum?: MultimediaSumAggregateInputType
+  min?: MultimediaMinAggregateInputType
+  max?: MultimediaMaxAggregateInputType
+}
+
+export type GetMultimediaAggregateType<T extends AggregateMultimediaArgs> = {
+  [P in keyof T]: P extends 'count' ? number : GetMultimediaAggregateScalarType<T[P]>
+}
+
+export type GetMultimediaAggregateScalarType<T extends any> = {
+  [P in keyof T]: P extends keyof MultimediaAvgAggregateOutputType ? MultimediaAvgAggregateOutputType[P] : never
+}
+    
+    
+
+export type MultimediaSelect = {
+  id?: boolean
+  url?: boolean
+  createdAt?: boolean
+  lesson?: boolean | LessonArgs
+  lessonId?: boolean
+}
+
+export type MultimediaInclude = {
+  lesson?: boolean | LessonArgs
+}
+
+export type MultimediaGetPayload<
+  S extends boolean | null | undefined | MultimediaArgs,
+  U = keyof S
+> = S extends true
+  ? Multimedia
+  : S extends undefined
+  ? never
+  : S extends MultimediaArgs | FindManyMultimediaArgs
+  ? 'include' extends U
+    ? Multimedia  & {
+      [P in TrueKeys<S['include']>]:
+      P extends 'lesson'
+      ? LessonGetPayload<S['include'][P]> | null : never
+    }
+  : 'select' extends U
+    ? {
+      [P in TrueKeys<S['select']>]:P extends keyof Multimedia ? Multimedia[P]
+: 
+      P extends 'lesson'
+      ? LessonGetPayload<S['select'][P]> | null : never
+    }
+  : Multimedia
+: Multimedia
+
+
+export interface MultimediaDelegate {
+  /**
+   * Find zero or one Multimedia that matches the filter.
+   * @param {FindOneMultimediaArgs} args - Arguments to find a Multimedia
+   * @example
+   * // Get one Multimedia
+   * const multimedia = await prisma.multimedia.findOne({
+   *   where: {
+   *     // ... provide filter here
+   *   }
+   * })
+  **/
+  findOne<T extends FindOneMultimediaArgs>(
+    args: Subset<T, FindOneMultimediaArgs>
+  ): CheckSelect<T, Prisma__MultimediaClient<Multimedia | null>, Prisma__MultimediaClient<MultimediaGetPayload<T> | null>>
+  /**
+   * Find the first Multimedia that matches the filter.
+   * @param {FindFirstMultimediaArgs} args - Arguments to find a Multimedia
+   * @example
+   * // Get one Multimedia
+   * const multimedia = await prisma.multimedia.findFirst({
+   *   where: {
+   *     // ... provide filter here
+   *   }
+   * })
+  **/
+  findFirst<T extends FindFirstMultimediaArgs>(
+    args: Subset<T, FindFirstMultimediaArgs>
+  ): CheckSelect<T, Prisma__MultimediaClient<Multimedia>, Prisma__MultimediaClient<MultimediaGetPayload<T>>>
+  /**
+   * Find zero or more Multimedias that matches the filter.
+   * @param {FindManyMultimediaArgs=} args - Arguments to filter and select certain fields only.
+   * @example
+   * // Get all Multimedias
+   * const multimedias = await prisma.multimedia.findMany()
+   * 
+   * // Get first 10 Multimedias
+   * const multimedias = await prisma.multimedia.findMany({ take: 10 })
+   * 
+   * // Only select the `id`
+   * const multimediaWithIdOnly = await prisma.multimedia.findMany({ select: { id: true } })
+   * 
+  **/
+  findMany<T extends FindManyMultimediaArgs>(
+    args?: Subset<T, FindManyMultimediaArgs>
+  ): CheckSelect<T, Promise<Array<Multimedia>>, Promise<Array<MultimediaGetPayload<T>>>>
+  /**
+   * Create a Multimedia.
+   * @param {MultimediaCreateArgs} args - Arguments to create a Multimedia.
+   * @example
+   * // Create one Multimedia
+   * const Multimedia = await prisma.multimedia.create({
+   *   data: {
+   *     // ... data to create a Multimedia
+   *   }
+   * })
+   * 
+  **/
+  create<T extends MultimediaCreateArgs>(
+    args: Subset<T, MultimediaCreateArgs>
+  ): CheckSelect<T, Prisma__MultimediaClient<Multimedia>, Prisma__MultimediaClient<MultimediaGetPayload<T>>>
+  /**
+   * Delete a Multimedia.
+   * @param {MultimediaDeleteArgs} args - Arguments to delete one Multimedia.
+   * @example
+   * // Delete one Multimedia
+   * const Multimedia = await prisma.multimedia.delete({
+   *   where: {
+   *     // ... filter to delete one Multimedia
+   *   }
+   * })
+   * 
+  **/
+  delete<T extends MultimediaDeleteArgs>(
+    args: Subset<T, MultimediaDeleteArgs>
+  ): CheckSelect<T, Prisma__MultimediaClient<Multimedia>, Prisma__MultimediaClient<MultimediaGetPayload<T>>>
+  /**
+   * Update one Multimedia.
+   * @param {MultimediaUpdateArgs} args - Arguments to update one Multimedia.
+   * @example
+   * // Update one Multimedia
+   * const multimedia = await prisma.multimedia.update({
+   *   where: {
+   *     // ... provide filter here
+   *   },
+   *   data: {
+   *     // ... provide data here
+   *   }
+   * })
+   * 
+  **/
+  update<T extends MultimediaUpdateArgs>(
+    args: Subset<T, MultimediaUpdateArgs>
+  ): CheckSelect<T, Prisma__MultimediaClient<Multimedia>, Prisma__MultimediaClient<MultimediaGetPayload<T>>>
+  /**
+   * Delete zero or more Multimedias.
+   * @param {MultimediaDeleteManyArgs} args - Arguments to filter Multimedias to delete.
+   * @example
+   * // Delete a few Multimedias
+   * const { count } = await prisma.multimedia.deleteMany({
+   *   where: {
+   *     // ... provide filter here
+   *   }
+   * })
+   * 
+  **/
+  deleteMany<T extends MultimediaDeleteManyArgs>(
+    args: Subset<T, MultimediaDeleteManyArgs>
+  ): Promise<BatchPayload>
+  /**
+   * Update zero or more Multimedias.
+   * @param {MultimediaUpdateManyArgs} args - Arguments to update one or more rows.
+   * @example
+   * // Update many Multimedias
+   * const multimedia = await prisma.multimedia.updateMany({
+   *   where: {
+   *     // ... provide filter here
+   *   },
+   *   data: {
+   *     // ... provide data here
+   *   }
+   * })
+   * 
+  **/
+  updateMany<T extends MultimediaUpdateManyArgs>(
+    args: Subset<T, MultimediaUpdateManyArgs>
+  ): Promise<BatchPayload>
+  /**
+   * Create or update one Multimedia.
+   * @param {MultimediaUpsertArgs} args - Arguments to update or create a Multimedia.
+   * @example
+   * // Update or create a Multimedia
+   * const multimedia = await prisma.multimedia.upsert({
+   *   create: {
+   *     // ... data to create a Multimedia
+   *   },
+   *   update: {
+   *     // ... in case it already exists, update
+   *   },
+   *   where: {
+   *     // ... the filter for the Multimedia we want to update
+   *   }
+   * })
+  **/
+  upsert<T extends MultimediaUpsertArgs>(
+    args: Subset<T, MultimediaUpsertArgs>
+  ): CheckSelect<T, Prisma__MultimediaClient<Multimedia>, Prisma__MultimediaClient<MultimediaGetPayload<T>>>
+  /**
+   * Count
+   */
+  count(args?: Omit<FindManyMultimediaArgs, 'select' | 'include'>): Promise<number>
+
+  /**
+   * Aggregate
+   */
+  aggregate<T extends AggregateMultimediaArgs>(args: Subset<T, AggregateMultimediaArgs>): Promise<GetMultimediaAggregateType<T>>
+}
+
+/**
+ * The delegate class that acts as a "Promise-like" for Multimedia.
+ * Why is this prefixed with `Prisma__`?
+ * Because we want to prevent naming conflicts as mentioned in 
+ * https://github.com/prisma/prisma-client-js/issues/707
+ */
+export declare class Prisma__MultimediaClient<T> implements Promise<T> {
+  private readonly _dmmf;
+  private readonly _fetcher;
+  private readonly _queryType;
+  private readonly _rootField;
+  private readonly _clientMethod;
+  private readonly _args;
+  private readonly _dataPath;
+  private readonly _errorFormat;
+  private readonly _measurePerformance?;
+  private _isList;
+  private _callsite;
+  private _requestPromise?;
+  constructor(_dmmf: DMMFClass, _fetcher: PrismaClientFetcher, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
+  readonly [Symbol.toStringTag]: 'PrismaClientPromise';
+
+  lesson<T extends LessonArgs = {}>(args?: Subset<T, LessonArgs>): CheckSelect<T, Prisma__LessonClient<Lesson | null>, Prisma__LessonClient<LessonGetPayload<T> | null>>;
+
+  private get _document();
+  /**
+   * Attaches callbacks for the resolution and/or rejection of the Promise.
+   * @param onfulfilled The callback to execute when the Promise is resolved.
+   * @param onrejected The callback to execute when the Promise is rejected.
+   * @returns A Promise for the completion of which ever callback is executed.
+   */
+  then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | Promise<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | Promise<TResult2>) | undefined | null): Promise<TResult1 | TResult2>;
+  /**
+   * Attaches a callback for only the rejection of the Promise.
+   * @param onrejected The callback to execute when the Promise is rejected.
+   * @returns A Promise for the completion of the callback.
+   */
+  catch<TResult = never>(onrejected?: ((reason: any) => TResult | Promise<TResult>) | undefined | null): Promise<T | TResult>;
+  /**
+   * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+   * resolved value cannot be modified from the callback.
+   * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+   * @returns A Promise for the completion of the callback.
+   */
+  finally(onfinally?: (() => void) | undefined | null): Promise<T>;
+}
+
+// Custom InputTypes
+
+/**
+ * Multimedia findOne
+ */
+export type FindOneMultimediaArgs = {
+  /**
+   * Select specific fields to fetch from the Multimedia
+  **/
+  select?: MultimediaSelect | null
+  /**
+   * Choose, which related nodes to fetch as well.
+  **/
+  include?: MultimediaInclude | null
+  /**
+   * Filter, which Multimedia to fetch.
+  **/
+  where: MultimediaWhereUniqueInput
+}
+
+
+/**
+ * Multimedia findFirst
+ */
+export type FindFirstMultimediaArgs = {
+  /**
+   * Select specific fields to fetch from the Multimedia
+  **/
+  select?: MultimediaSelect | null
+  /**
+   * Choose, which related nodes to fetch as well.
+  **/
+  include?: MultimediaInclude | null
+  /**
+   * Filter, which Multimedia to fetch.
+  **/
+  where?: MultimediaWhereInput
+  orderBy?: Enumerable<MultimediaOrderByInput> | MultimediaOrderByInput
+  cursor?: MultimediaWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Enumerable<MultimediaDistinctFieldEnum>
+}
+
+
+/**
+ * Multimedia findMany
+ */
+export type FindManyMultimediaArgs = {
+  /**
+   * Select specific fields to fetch from the Multimedia
+  **/
+  select?: MultimediaSelect | null
+  /**
+   * Choose, which related nodes to fetch as well.
+  **/
+  include?: MultimediaInclude | null
+  /**
+   * Filter, which Multimedias to fetch.
+  **/
+  where?: MultimediaWhereInput
+  /**
+   * Determine the order of the Multimedias to fetch.
+  **/
+  orderBy?: Enumerable<MultimediaOrderByInput> | MultimediaOrderByInput
+  /**
+   * Sets the position for listing Multimedias.
+  **/
+  cursor?: MultimediaWhereUniqueInput
+  /**
+   * The number of Multimedias to fetch. If negative number, it will take Multimedias before the `cursor`.
+  **/
+  take?: number
+  /**
+   * Skip the first `n` Multimedias.
+  **/
+  skip?: number
+  distinct?: Enumerable<MultimediaDistinctFieldEnum>
+}
+
+
+/**
+ * Multimedia create
+ */
+export type MultimediaCreateArgs = {
+  /**
+   * Select specific fields to fetch from the Multimedia
+  **/
+  select?: MultimediaSelect | null
+  /**
+   * Choose, which related nodes to fetch as well.
+  **/
+  include?: MultimediaInclude | null
+  /**
+   * The data needed to create a Multimedia.
+  **/
+  data: MultimediaCreateInput
+}
+
+
+/**
+ * Multimedia update
+ */
+export type MultimediaUpdateArgs = {
+  /**
+   * Select specific fields to fetch from the Multimedia
+  **/
+  select?: MultimediaSelect | null
+  /**
+   * Choose, which related nodes to fetch as well.
+  **/
+  include?: MultimediaInclude | null
+  /**
+   * The data needed to update a Multimedia.
+  **/
+  data: MultimediaUpdateInput
+  /**
+   * Choose, which Multimedia to update.
+  **/
+  where: MultimediaWhereUniqueInput
+}
+
+
+/**
+ * Multimedia updateMany
+ */
+export type MultimediaUpdateManyArgs = {
+  data: MultimediaUpdateManyMutationInput
+  where?: MultimediaWhereInput
+}
+
+
+/**
+ * Multimedia upsert
+ */
+export type MultimediaUpsertArgs = {
+  /**
+   * Select specific fields to fetch from the Multimedia
+  **/
+  select?: MultimediaSelect | null
+  /**
+   * Choose, which related nodes to fetch as well.
+  **/
+  include?: MultimediaInclude | null
+  /**
+   * The filter to search for the Multimedia to update in case it exists.
+  **/
+  where: MultimediaWhereUniqueInput
+  /**
+   * In case the Multimedia found by the `where` argument doesn't exist, create a new Multimedia with this data.
+  **/
+  create: MultimediaCreateInput
+  /**
+   * In case the Multimedia was found with the provided `where` argument, update it with this data.
+  **/
+  update: MultimediaUpdateInput
+}
+
+
+/**
+ * Multimedia delete
+ */
+export type MultimediaDeleteArgs = {
+  /**
+   * Select specific fields to fetch from the Multimedia
+  **/
+  select?: MultimediaSelect | null
+  /**
+   * Choose, which related nodes to fetch as well.
+  **/
+  include?: MultimediaInclude | null
+  /**
+   * Filter which Multimedia to delete.
+  **/
+  where: MultimediaWhereUniqueInput
+}
+
+
+/**
+ * Multimedia deleteMany
+ */
+export type MultimediaDeleteManyArgs = {
+  where?: MultimediaWhereInput
+}
+
+
+/**
+ * Multimedia without action
+ */
+export type MultimediaArgs = {
+  /**
+   * Select specific fields to fetch from the Multimedia
+  **/
+  select?: MultimediaSelect | null
+  /**
+   * Choose, which related nodes to fetch as well.
+  **/
+  include?: MultimediaInclude | null
+}
+
+
+
+/**
+ * Model User
+ */
+
+export type User = {
+  id: number
+  name: string
+  email: string
+  password: string
+}
+
+
+export type AggregateUser = {
+  count: number
+  avg: UserAvgAggregateOutputType | null
+  sum: UserSumAggregateOutputType | null
+  min: UserMinAggregateOutputType | null
+  max: UserMaxAggregateOutputType | null
+}
+
+export type UserAvgAggregateOutputType = {
+  id: number
+}
+
+export type UserSumAggregateOutputType = {
+  id: number
+}
+
+export type UserMinAggregateOutputType = {
+  id: number
+}
+
+export type UserMaxAggregateOutputType = {
+  id: number
+}
+
+
+export type UserAvgAggregateInputType = {
+  id?: true
+}
+
+export type UserSumAggregateInputType = {
+  id?: true
+}
+
+export type UserMinAggregateInputType = {
+  id?: true
+}
+
+export type UserMaxAggregateInputType = {
+  id?: true
+}
+
+export type AggregateUserArgs = {
+  where?: UserWhereInput
+  orderBy?: Enumerable<UserOrderByInput> | UserOrderByInput
+  cursor?: UserWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Enumerable<UserDistinctFieldEnum>
+  count?: true
+  avg?: UserAvgAggregateInputType
+  sum?: UserSumAggregateInputType
+  min?: UserMinAggregateInputType
+  max?: UserMaxAggregateInputType
+}
+
+export type GetUserAggregateType<T extends AggregateUserArgs> = {
+  [P in keyof T]: P extends 'count' ? number : GetUserAggregateScalarType<T[P]>
+}
+
+export type GetUserAggregateScalarType<T extends any> = {
+  [P in keyof T]: P extends keyof UserAvgAggregateOutputType ? UserAvgAggregateOutputType[P] : never
+}
+    
+    
+
+export type UserSelect = {
+  id?: boolean
+  name?: boolean
+  email?: boolean
+  password?: boolean
+  lessons?: boolean | FindManyLessonArgs
+  watchSymbols?: boolean | FindManyWatchSymbolsArgs
+}
+
+export type UserInclude = {
+  lessons?: boolean | FindManyLessonArgs
+  watchSymbols?: boolean | FindManyWatchSymbolsArgs
+}
+
+export type UserGetPayload<
+  S extends boolean | null | undefined | UserArgs,
+  U = keyof S
+> = S extends true
+  ? User
+  : S extends undefined
+  ? never
+  : S extends UserArgs | FindManyUserArgs
+  ? 'include' extends U
+    ? User  & {
+      [P in TrueKeys<S['include']>]:
+      P extends 'lessons'
+      ? Array<LessonGetPayload<S['include'][P]>> :
+      P extends 'watchSymbols'
+      ? Array<WatchSymbolsGetPayload<S['include'][P]>> : never
+    }
+  : 'select' extends U
+    ? {
+      [P in TrueKeys<S['select']>]:P extends keyof User ? User[P]
+: 
+      P extends 'lessons'
+      ? Array<LessonGetPayload<S['select'][P]>> :
+      P extends 'watchSymbols'
+      ? Array<WatchSymbolsGetPayload<S['select'][P]>> : never
+    }
+  : User
+: User
+
+
+export interface UserDelegate {
+  /**
+   * Find zero or one User that matches the filter.
+   * @param {FindOneUserArgs} args - Arguments to find a User
+   * @example
+   * // Get one User
+   * const user = await prisma.user.findOne({
+   *   where: {
+   *     // ... provide filter here
+   *   }
+   * })
+  **/
+  findOne<T extends FindOneUserArgs>(
+    args: Subset<T, FindOneUserArgs>
+  ): CheckSelect<T, Prisma__UserClient<User | null>, Prisma__UserClient<UserGetPayload<T> | null>>
+  /**
+   * Find the first User that matches the filter.
+   * @param {FindFirstUserArgs} args - Arguments to find a User
+   * @example
+   * // Get one User
+   * const user = await prisma.user.findFirst({
+   *   where: {
+   *     // ... provide filter here
+   *   }
+   * })
+  **/
+  findFirst<T extends FindFirstUserArgs>(
+    args: Subset<T, FindFirstUserArgs>
+  ): CheckSelect<T, Prisma__UserClient<User>, Prisma__UserClient<UserGetPayload<T>>>
+  /**
+   * Find zero or more Users that matches the filter.
+   * @param {FindManyUserArgs=} args - Arguments to filter and select certain fields only.
+   * @example
+   * // Get all Users
+   * const users = await prisma.user.findMany()
+   * 
+   * // Get first 10 Users
+   * const users = await prisma.user.findMany({ take: 10 })
+   * 
+   * // Only select the `id`
+   * const userWithIdOnly = await prisma.user.findMany({ select: { id: true } })
+   * 
+  **/
+  findMany<T extends FindManyUserArgs>(
+    args?: Subset<T, FindManyUserArgs>
+  ): CheckSelect<T, Promise<Array<User>>, Promise<Array<UserGetPayload<T>>>>
+  /**
+   * Create a User.
+   * @param {UserCreateArgs} args - Arguments to create a User.
+   * @example
+   * // Create one User
+   * const User = await prisma.user.create({
+   *   data: {
+   *     // ... data to create a User
+   *   }
+   * })
+   * 
+  **/
+  create<T extends UserCreateArgs>(
+    args: Subset<T, UserCreateArgs>
+  ): CheckSelect<T, Prisma__UserClient<User>, Prisma__UserClient<UserGetPayload<T>>>
+  /**
+   * Delete a User.
+   * @param {UserDeleteArgs} args - Arguments to delete one User.
+   * @example
+   * // Delete one User
+   * const User = await prisma.user.delete({
+   *   where: {
+   *     // ... filter to delete one User
+   *   }
+   * })
+   * 
+  **/
+  delete<T extends UserDeleteArgs>(
+    args: Subset<T, UserDeleteArgs>
+  ): CheckSelect<T, Prisma__UserClient<User>, Prisma__UserClient<UserGetPayload<T>>>
+  /**
+   * Update one User.
+   * @param {UserUpdateArgs} args - Arguments to update one User.
+   * @example
+   * // Update one User
+   * const user = await prisma.user.update({
+   *   where: {
+   *     // ... provide filter here
+   *   },
+   *   data: {
+   *     // ... provide data here
+   *   }
+   * })
+   * 
+  **/
+  update<T extends UserUpdateArgs>(
+    args: Subset<T, UserUpdateArgs>
+  ): CheckSelect<T, Prisma__UserClient<User>, Prisma__UserClient<UserGetPayload<T>>>
+  /**
+   * Delete zero or more Users.
+   * @param {UserDeleteManyArgs} args - Arguments to filter Users to delete.
+   * @example
+   * // Delete a few Users
+   * const { count } = await prisma.user.deleteMany({
+   *   where: {
+   *     // ... provide filter here
+   *   }
+   * })
+   * 
+  **/
+  deleteMany<T extends UserDeleteManyArgs>(
+    args: Subset<T, UserDeleteManyArgs>
+  ): Promise<BatchPayload>
+  /**
+   * Update zero or more Users.
+   * @param {UserUpdateManyArgs} args - Arguments to update one or more rows.
+   * @example
+   * // Update many Users
+   * const user = await prisma.user.updateMany({
+   *   where: {
+   *     // ... provide filter here
+   *   },
+   *   data: {
+   *     // ... provide data here
+   *   }
+   * })
+   * 
+  **/
+  updateMany<T extends UserUpdateManyArgs>(
+    args: Subset<T, UserUpdateManyArgs>
+  ): Promise<BatchPayload>
+  /**
+   * Create or update one User.
+   * @param {UserUpsertArgs} args - Arguments to update or create a User.
+   * @example
+   * // Update or create a User
+   * const user = await prisma.user.upsert({
+   *   create: {
+   *     // ... data to create a User
+   *   },
+   *   update: {
+   *     // ... in case it already exists, update
+   *   },
+   *   where: {
+   *     // ... the filter for the User we want to update
+   *   }
+   * })
+  **/
+  upsert<T extends UserUpsertArgs>(
+    args: Subset<T, UserUpsertArgs>
+  ): CheckSelect<T, Prisma__UserClient<User>, Prisma__UserClient<UserGetPayload<T>>>
+  /**
+   * Count
+   */
+  count(args?: Omit<FindManyUserArgs, 'select' | 'include'>): Promise<number>
+
+  /**
+   * Aggregate
+   */
+  aggregate<T extends AggregateUserArgs>(args: Subset<T, AggregateUserArgs>): Promise<GetUserAggregateType<T>>
+}
+
+/**
+ * The delegate class that acts as a "Promise-like" for User.
+ * Why is this prefixed with `Prisma__`?
+ * Because we want to prevent naming conflicts as mentioned in 
+ * https://github.com/prisma/prisma-client-js/issues/707
+ */
+export declare class Prisma__UserClient<T> implements Promise<T> {
+  private readonly _dmmf;
+  private readonly _fetcher;
+  private readonly _queryType;
+  private readonly _rootField;
+  private readonly _clientMethod;
+  private readonly _args;
+  private readonly _dataPath;
+  private readonly _errorFormat;
+  private readonly _measurePerformance?;
+  private _isList;
+  private _callsite;
+  private _requestPromise?;
+  constructor(_dmmf: DMMFClass, _fetcher: PrismaClientFetcher, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
+  readonly [Symbol.toStringTag]: 'PrismaClientPromise';
+
+  lessons<T extends FindManyLessonArgs = {}>(args?: Subset<T, FindManyLessonArgs>): CheckSelect<T, Promise<Array<Lesson>>, Promise<Array<LessonGetPayload<T>>>>;
+
+  watchSymbols<T extends FindManyWatchSymbolsArgs = {}>(args?: Subset<T, FindManyWatchSymbolsArgs>): CheckSelect<T, Promise<Array<WatchSymbols>>, Promise<Array<WatchSymbolsGetPayload<T>>>>;
+
+  private get _document();
+  /**
+   * Attaches callbacks for the resolution and/or rejection of the Promise.
+   * @param onfulfilled The callback to execute when the Promise is resolved.
+   * @param onrejected The callback to execute when the Promise is rejected.
+   * @returns A Promise for the completion of which ever callback is executed.
+   */
+  then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | Promise<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | Promise<TResult2>) | undefined | null): Promise<TResult1 | TResult2>;
+  /**
+   * Attaches a callback for only the rejection of the Promise.
+   * @param onrejected The callback to execute when the Promise is rejected.
+   * @returns A Promise for the completion of the callback.
+   */
+  catch<TResult = never>(onrejected?: ((reason: any) => TResult | Promise<TResult>) | undefined | null): Promise<T | TResult>;
+  /**
+   * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+   * resolved value cannot be modified from the callback.
+   * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+   * @returns A Promise for the completion of the callback.
+   */
+  finally(onfinally?: (() => void) | undefined | null): Promise<T>;
+}
+
+// Custom InputTypes
+
+/**
+ * User findOne
+ */
+export type FindOneUserArgs = {
+  /**
+   * Select specific fields to fetch from the User
+  **/
+  select?: UserSelect | null
+  /**
+   * Choose, which related nodes to fetch as well.
+  **/
+  include?: UserInclude | null
+  /**
+   * Filter, which User to fetch.
+  **/
+  where: UserWhereUniqueInput
+}
+
+
+/**
+ * User findFirst
+ */
+export type FindFirstUserArgs = {
+  /**
+   * Select specific fields to fetch from the User
+  **/
+  select?: UserSelect | null
+  /**
+   * Choose, which related nodes to fetch as well.
+  **/
+  include?: UserInclude | null
+  /**
+   * Filter, which User to fetch.
+  **/
+  where?: UserWhereInput
+  orderBy?: Enumerable<UserOrderByInput> | UserOrderByInput
+  cursor?: UserWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Enumerable<UserDistinctFieldEnum>
+}
+
+
+/**
+ * User findMany
+ */
+export type FindManyUserArgs = {
+  /**
+   * Select specific fields to fetch from the User
+  **/
+  select?: UserSelect | null
+  /**
+   * Choose, which related nodes to fetch as well.
+  **/
+  include?: UserInclude | null
+  /**
+   * Filter, which Users to fetch.
+  **/
+  where?: UserWhereInput
+  /**
+   * Determine the order of the Users to fetch.
+  **/
+  orderBy?: Enumerable<UserOrderByInput> | UserOrderByInput
+  /**
+   * Sets the position for listing Users.
+  **/
+  cursor?: UserWhereUniqueInput
+  /**
+   * The number of Users to fetch. If negative number, it will take Users before the `cursor`.
+  **/
+  take?: number
+  /**
+   * Skip the first `n` Users.
+  **/
+  skip?: number
+  distinct?: Enumerable<UserDistinctFieldEnum>
+}
+
+
+/**
+ * User create
+ */
+export type UserCreateArgs = {
+  /**
+   * Select specific fields to fetch from the User
+  **/
+  select?: UserSelect | null
+  /**
+   * Choose, which related nodes to fetch as well.
+  **/
+  include?: UserInclude | null
+  /**
+   * The data needed to create a User.
+  **/
+  data: UserCreateInput
+}
+
+
+/**
+ * User update
+ */
+export type UserUpdateArgs = {
+  /**
+   * Select specific fields to fetch from the User
+  **/
+  select?: UserSelect | null
+  /**
+   * Choose, which related nodes to fetch as well.
+  **/
+  include?: UserInclude | null
+  /**
+   * The data needed to update a User.
+  **/
+  data: UserUpdateInput
+  /**
+   * Choose, which User to update.
+  **/
+  where: UserWhereUniqueInput
+}
+
+
+/**
+ * User updateMany
+ */
+export type UserUpdateManyArgs = {
+  data: UserUpdateManyMutationInput
+  where?: UserWhereInput
+}
+
+
+/**
+ * User upsert
+ */
+export type UserUpsertArgs = {
+  /**
+   * Select specific fields to fetch from the User
+  **/
+  select?: UserSelect | null
+  /**
+   * Choose, which related nodes to fetch as well.
+  **/
+  include?: UserInclude | null
+  /**
+   * The filter to search for the User to update in case it exists.
+  **/
+  where: UserWhereUniqueInput
+  /**
+   * In case the User found by the `where` argument doesn't exist, create a new User with this data.
+  **/
+  create: UserCreateInput
+  /**
+   * In case the User was found with the provided `where` argument, update it with this data.
+  **/
+  update: UserUpdateInput
+}
+
+
+/**
+ * User delete
+ */
+export type UserDeleteArgs = {
+  /**
+   * Select specific fields to fetch from the User
+  **/
+  select?: UserSelect | null
+  /**
+   * Choose, which related nodes to fetch as well.
+  **/
+  include?: UserInclude | null
+  /**
+   * Filter which User to delete.
+  **/
+  where: UserWhereUniqueInput
+}
+
+
+/**
+ * User deleteMany
+ */
+export type UserDeleteManyArgs = {
+  where?: UserWhereInput
+}
+
+
+/**
+ * User without action
+ */
+export type UserArgs = {
+  /**
+   * Select specific fields to fetch from the User
+  **/
+  select?: UserSelect | null
+  /**
+   * Choose, which related nodes to fetch as well.
+  **/
+  include?: UserInclude | null
+}
+
+
+
+/**
+ * Model WatchSymbols
+ */
+
+export type WatchSymbols = {
+  id: number
+  symbol: string
+  amount: string
+  phone: string
+  createdAt: Date
+  postedById: number | null
+}
+
+
+export type AggregateWatchSymbols = {
+  count: number
+  avg: WatchSymbolsAvgAggregateOutputType | null
+  sum: WatchSymbolsSumAggregateOutputType | null
+  min: WatchSymbolsMinAggregateOutputType | null
+  max: WatchSymbolsMaxAggregateOutputType | null
+}
+
+export type WatchSymbolsAvgAggregateOutputType = {
+  id: number
+  postedById: number | null
+}
+
+export type WatchSymbolsSumAggregateOutputType = {
+  id: number
+  postedById: number | null
+}
+
+export type WatchSymbolsMinAggregateOutputType = {
+  id: number
+  postedById: number | null
+}
+
+export type WatchSymbolsMaxAggregateOutputType = {
+  id: number
+  postedById: number | null
+}
+
+
+export type WatchSymbolsAvgAggregateInputType = {
+  id?: true
+  postedById?: true
+}
+
+export type WatchSymbolsSumAggregateInputType = {
+  id?: true
+  postedById?: true
+}
+
+export type WatchSymbolsMinAggregateInputType = {
+  id?: true
+  postedById?: true
+}
+
+export type WatchSymbolsMaxAggregateInputType = {
+  id?: true
+  postedById?: true
+}
+
+export type AggregateWatchSymbolsArgs = {
+  where?: WatchSymbolsWhereInput
+  orderBy?: Enumerable<WatchSymbolsOrderByInput> | WatchSymbolsOrderByInput
+  cursor?: WatchSymbolsWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Enumerable<WatchSymbolsDistinctFieldEnum>
+  count?: true
+  avg?: WatchSymbolsAvgAggregateInputType
+  sum?: WatchSymbolsSumAggregateInputType
+  min?: WatchSymbolsMinAggregateInputType
+  max?: WatchSymbolsMaxAggregateInputType
+}
+
+export type GetWatchSymbolsAggregateType<T extends AggregateWatchSymbolsArgs> = {
+  [P in keyof T]: P extends 'count' ? number : GetWatchSymbolsAggregateScalarType<T[P]>
+}
+
+export type GetWatchSymbolsAggregateScalarType<T extends any> = {
+  [P in keyof T]: P extends keyof WatchSymbolsAvgAggregateOutputType ? WatchSymbolsAvgAggregateOutputType[P] : never
+}
+    
+    
+
+export type WatchSymbolsSelect = {
+  id?: boolean
+  symbol?: boolean
+  amount?: boolean
+  phone?: boolean
+  createdAt?: boolean
+  postedById?: boolean
+  postedBy?: boolean | UserArgs
+}
+
+export type WatchSymbolsInclude = {
+  postedBy?: boolean | UserArgs
+}
+
+export type WatchSymbolsGetPayload<
+  S extends boolean | null | undefined | WatchSymbolsArgs,
+  U = keyof S
+> = S extends true
+  ? WatchSymbols
+  : S extends undefined
+  ? never
+  : S extends WatchSymbolsArgs | FindManyWatchSymbolsArgs
+  ? 'include' extends U
+    ? WatchSymbols  & {
+      [P in TrueKeys<S['include']>]:
+      P extends 'postedBy'
+      ? UserGetPayload<S['include'][P]> | null : never
+    }
+  : 'select' extends U
+    ? {
+      [P in TrueKeys<S['select']>]:P extends keyof WatchSymbols ? WatchSymbols[P]
+: 
+      P extends 'postedBy'
+      ? UserGetPayload<S['select'][P]> | null : never
+    }
+  : WatchSymbols
+: WatchSymbols
+
+
+export interface WatchSymbolsDelegate {
+  /**
+   * Find zero or one WatchSymbols that matches the filter.
+   * @param {FindOneWatchSymbolsArgs} args - Arguments to find a WatchSymbols
+   * @example
+   * // Get one WatchSymbols
+   * const watchSymbols = await prisma.watchSymbols.findOne({
+   *   where: {
+   *     // ... provide filter here
+   *   }
+   * })
+  **/
+  findOne<T extends FindOneWatchSymbolsArgs>(
+    args: Subset<T, FindOneWatchSymbolsArgs>
+  ): CheckSelect<T, Prisma__WatchSymbolsClient<WatchSymbols | null>, Prisma__WatchSymbolsClient<WatchSymbolsGetPayload<T> | null>>
+  /**
+   * Find the first WatchSymbols that matches the filter.
+   * @param {FindFirstWatchSymbolsArgs} args - Arguments to find a WatchSymbols
+   * @example
+   * // Get one WatchSymbols
+   * const watchSymbols = await prisma.watchSymbols.findFirst({
+   *   where: {
+   *     // ... provide filter here
+   *   }
+   * })
+  **/
+  findFirst<T extends FindFirstWatchSymbolsArgs>(
+    args: Subset<T, FindFirstWatchSymbolsArgs>
+  ): CheckSelect<T, Prisma__WatchSymbolsClient<WatchSymbols>, Prisma__WatchSymbolsClient<WatchSymbolsGetPayload<T>>>
+  /**
+   * Find zero or more WatchSymbols that matches the filter.
+   * @param {FindManyWatchSymbolsArgs=} args - Arguments to filter and select certain fields only.
+   * @example
+   * // Get all WatchSymbols
+   * const watchSymbols = await prisma.watchSymbols.findMany()
+   * 
+   * // Get first 10 WatchSymbols
+   * const watchSymbols = await prisma.watchSymbols.findMany({ take: 10 })
+   * 
+   * // Only select the `id`
+   * const watchSymbolsWithIdOnly = await prisma.watchSymbols.findMany({ select: { id: true } })
+   * 
+  **/
+  findMany<T extends FindManyWatchSymbolsArgs>(
+    args?: Subset<T, FindManyWatchSymbolsArgs>
+  ): CheckSelect<T, Promise<Array<WatchSymbols>>, Promise<Array<WatchSymbolsGetPayload<T>>>>
+  /**
+   * Create a WatchSymbols.
+   * @param {WatchSymbolsCreateArgs} args - Arguments to create a WatchSymbols.
+   * @example
+   * // Create one WatchSymbols
+   * const WatchSymbols = await prisma.watchSymbols.create({
+   *   data: {
+   *     // ... data to create a WatchSymbols
+   *   }
+   * })
+   * 
+  **/
+  create<T extends WatchSymbolsCreateArgs>(
+    args: Subset<T, WatchSymbolsCreateArgs>
+  ): CheckSelect<T, Prisma__WatchSymbolsClient<WatchSymbols>, Prisma__WatchSymbolsClient<WatchSymbolsGetPayload<T>>>
+  /**
+   * Delete a WatchSymbols.
+   * @param {WatchSymbolsDeleteArgs} args - Arguments to delete one WatchSymbols.
+   * @example
+   * // Delete one WatchSymbols
+   * const WatchSymbols = await prisma.watchSymbols.delete({
+   *   where: {
+   *     // ... filter to delete one WatchSymbols
+   *   }
+   * })
+   * 
+  **/
+  delete<T extends WatchSymbolsDeleteArgs>(
+    args: Subset<T, WatchSymbolsDeleteArgs>
+  ): CheckSelect<T, Prisma__WatchSymbolsClient<WatchSymbols>, Prisma__WatchSymbolsClient<WatchSymbolsGetPayload<T>>>
+  /**
+   * Update one WatchSymbols.
+   * @param {WatchSymbolsUpdateArgs} args - Arguments to update one WatchSymbols.
+   * @example
+   * // Update one WatchSymbols
+   * const watchSymbols = await prisma.watchSymbols.update({
+   *   where: {
+   *     // ... provide filter here
+   *   },
+   *   data: {
+   *     // ... provide data here
+   *   }
+   * })
+   * 
+  **/
+  update<T extends WatchSymbolsUpdateArgs>(
+    args: Subset<T, WatchSymbolsUpdateArgs>
+  ): CheckSelect<T, Prisma__WatchSymbolsClient<WatchSymbols>, Prisma__WatchSymbolsClient<WatchSymbolsGetPayload<T>>>
+  /**
+   * Delete zero or more WatchSymbols.
+   * @param {WatchSymbolsDeleteManyArgs} args - Arguments to filter WatchSymbols to delete.
+   * @example
+   * // Delete a few WatchSymbols
+   * const { count } = await prisma.watchSymbols.deleteMany({
+   *   where: {
+   *     // ... provide filter here
+   *   }
+   * })
+   * 
+  **/
+  deleteMany<T extends WatchSymbolsDeleteManyArgs>(
+    args: Subset<T, WatchSymbolsDeleteManyArgs>
+  ): Promise<BatchPayload>
+  /**
+   * Update zero or more WatchSymbols.
+   * @param {WatchSymbolsUpdateManyArgs} args - Arguments to update one or more rows.
+   * @example
+   * // Update many WatchSymbols
+   * const watchSymbols = await prisma.watchSymbols.updateMany({
+   *   where: {
+   *     // ... provide filter here
+   *   },
+   *   data: {
+   *     // ... provide data here
+   *   }
+   * })
+   * 
+  **/
+  updateMany<T extends WatchSymbolsUpdateManyArgs>(
+    args: Subset<T, WatchSymbolsUpdateManyArgs>
+  ): Promise<BatchPayload>
+  /**
+   * Create or update one WatchSymbols.
+   * @param {WatchSymbolsUpsertArgs} args - Arguments to update or create a WatchSymbols.
+   * @example
+   * // Update or create a WatchSymbols
+   * const watchSymbols = await prisma.watchSymbols.upsert({
+   *   create: {
+   *     // ... data to create a WatchSymbols
+   *   },
+   *   update: {
+   *     // ... in case it already exists, update
+   *   },
+   *   where: {
+   *     // ... the filter for the WatchSymbols we want to update
+   *   }
+   * })
+  **/
+  upsert<T extends WatchSymbolsUpsertArgs>(
+    args: Subset<T, WatchSymbolsUpsertArgs>
+  ): CheckSelect<T, Prisma__WatchSymbolsClient<WatchSymbols>, Prisma__WatchSymbolsClient<WatchSymbolsGetPayload<T>>>
+  /**
+   * Count
+   */
+  count(args?: Omit<FindManyWatchSymbolsArgs, 'select' | 'include'>): Promise<number>
+
+  /**
+   * Aggregate
+   */
+  aggregate<T extends AggregateWatchSymbolsArgs>(args: Subset<T, AggregateWatchSymbolsArgs>): Promise<GetWatchSymbolsAggregateType<T>>
+}
+
+/**
+ * The delegate class that acts as a "Promise-like" for WatchSymbols.
+ * Why is this prefixed with `Prisma__`?
+ * Because we want to prevent naming conflicts as mentioned in 
+ * https://github.com/prisma/prisma-client-js/issues/707
+ */
+export declare class Prisma__WatchSymbolsClient<T> implements Promise<T> {
+  private readonly _dmmf;
+  private readonly _fetcher;
+  private readonly _queryType;
+  private readonly _rootField;
+  private readonly _clientMethod;
+  private readonly _args;
+  private readonly _dataPath;
+  private readonly _errorFormat;
+  private readonly _measurePerformance?;
+  private _isList;
+  private _callsite;
+  private _requestPromise?;
+  constructor(_dmmf: DMMFClass, _fetcher: PrismaClientFetcher, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
+  readonly [Symbol.toStringTag]: 'PrismaClientPromise';
+
+  postedBy<T extends UserArgs = {}>(args?: Subset<T, UserArgs>): CheckSelect<T, Prisma__UserClient<User | null>, Prisma__UserClient<UserGetPayload<T> | null>>;
+
+  private get _document();
+  /**
+   * Attaches callbacks for the resolution and/or rejection of the Promise.
+   * @param onfulfilled The callback to execute when the Promise is resolved.
+   * @param onrejected The callback to execute when the Promise is rejected.
+   * @returns A Promise for the completion of which ever callback is executed.
+   */
+  then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | Promise<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | Promise<TResult2>) | undefined | null): Promise<TResult1 | TResult2>;
+  /**
+   * Attaches a callback for only the rejection of the Promise.
+   * @param onrejected The callback to execute when the Promise is rejected.
+   * @returns A Promise for the completion of the callback.
+   */
+  catch<TResult = never>(onrejected?: ((reason: any) => TResult | Promise<TResult>) | undefined | null): Promise<T | TResult>;
+  /**
+   * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+   * resolved value cannot be modified from the callback.
+   * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+   * @returns A Promise for the completion of the callback.
+   */
+  finally(onfinally?: (() => void) | undefined | null): Promise<T>;
+}
+
+// Custom InputTypes
+
+/**
+ * WatchSymbols findOne
+ */
+export type FindOneWatchSymbolsArgs = {
+  /**
+   * Select specific fields to fetch from the WatchSymbols
+  **/
+  select?: WatchSymbolsSelect | null
+  /**
+   * Choose, which related nodes to fetch as well.
+  **/
+  include?: WatchSymbolsInclude | null
+  /**
+   * Filter, which WatchSymbols to fetch.
+  **/
+  where: WatchSymbolsWhereUniqueInput
+}
+
+
+/**
+ * WatchSymbols findFirst
+ */
+export type FindFirstWatchSymbolsArgs = {
+  /**
+   * Select specific fields to fetch from the WatchSymbols
+  **/
+  select?: WatchSymbolsSelect | null
+  /**
+   * Choose, which related nodes to fetch as well.
+  **/
+  include?: WatchSymbolsInclude | null
+  /**
+   * Filter, which WatchSymbols to fetch.
+  **/
+  where?: WatchSymbolsWhereInput
+  orderBy?: Enumerable<WatchSymbolsOrderByInput> | WatchSymbolsOrderByInput
+  cursor?: WatchSymbolsWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Enumerable<WatchSymbolsDistinctFieldEnum>
+}
+
+
+/**
+ * WatchSymbols findMany
+ */
+export type FindManyWatchSymbolsArgs = {
+  /**
+   * Select specific fields to fetch from the WatchSymbols
+  **/
+  select?: WatchSymbolsSelect | null
+  /**
+   * Choose, which related nodes to fetch as well.
+  **/
+  include?: WatchSymbolsInclude | null
+  /**
+   * Filter, which WatchSymbols to fetch.
+  **/
+  where?: WatchSymbolsWhereInput
+  /**
+   * Determine the order of the WatchSymbols to fetch.
+  **/
+  orderBy?: Enumerable<WatchSymbolsOrderByInput> | WatchSymbolsOrderByInput
+  /**
+   * Sets the position for listing WatchSymbols.
+  **/
+  cursor?: WatchSymbolsWhereUniqueInput
+  /**
+   * The number of WatchSymbols to fetch. If negative number, it will take WatchSymbols before the `cursor`.
+  **/
+  take?: number
+  /**
+   * Skip the first `n` WatchSymbols.
+  **/
+  skip?: number
+  distinct?: Enumerable<WatchSymbolsDistinctFieldEnum>
+}
+
+
+/**
+ * WatchSymbols create
+ */
+export type WatchSymbolsCreateArgs = {
+  /**
+   * Select specific fields to fetch from the WatchSymbols
+  **/
+  select?: WatchSymbolsSelect | null
+  /**
+   * Choose, which related nodes to fetch as well.
+  **/
+  include?: WatchSymbolsInclude | null
+  /**
+   * The data needed to create a WatchSymbols.
+  **/
+  data: WatchSymbolsCreateInput
+}
+
+
+/**
+ * WatchSymbols update
+ */
+export type WatchSymbolsUpdateArgs = {
+  /**
+   * Select specific fields to fetch from the WatchSymbols
+  **/
+  select?: WatchSymbolsSelect | null
+  /**
+   * Choose, which related nodes to fetch as well.
+  **/
+  include?: WatchSymbolsInclude | null
+  /**
+   * The data needed to update a WatchSymbols.
+  **/
+  data: WatchSymbolsUpdateInput
+  /**
+   * Choose, which WatchSymbols to update.
+  **/
+  where: WatchSymbolsWhereUniqueInput
+}
+
+
+/**
+ * WatchSymbols updateMany
+ */
+export type WatchSymbolsUpdateManyArgs = {
+  data: WatchSymbolsUpdateManyMutationInput
+  where?: WatchSymbolsWhereInput
+}
+
+
+/**
+ * WatchSymbols upsert
+ */
+export type WatchSymbolsUpsertArgs = {
+  /**
+   * Select specific fields to fetch from the WatchSymbols
+  **/
+  select?: WatchSymbolsSelect | null
+  /**
+   * Choose, which related nodes to fetch as well.
+  **/
+  include?: WatchSymbolsInclude | null
+  /**
+   * The filter to search for the WatchSymbols to update in case it exists.
+  **/
+  where: WatchSymbolsWhereUniqueInput
+  /**
+   * In case the WatchSymbols found by the `where` argument doesn't exist, create a new WatchSymbols with this data.
+  **/
+  create: WatchSymbolsCreateInput
+  /**
+   * In case the WatchSymbols was found with the provided `where` argument, update it with this data.
+  **/
+  update: WatchSymbolsUpdateInput
+}
+
+
+/**
+ * WatchSymbols delete
+ */
+export type WatchSymbolsDeleteArgs = {
+  /**
+   * Select specific fields to fetch from the WatchSymbols
+  **/
+  select?: WatchSymbolsSelect | null
+  /**
+   * Choose, which related nodes to fetch as well.
+  **/
+  include?: WatchSymbolsInclude | null
+  /**
+   * Filter which WatchSymbols to delete.
+  **/
+  where: WatchSymbolsWhereUniqueInput
+}
+
+
+/**
+ * WatchSymbols deleteMany
+ */
+export type WatchSymbolsDeleteManyArgs = {
+  where?: WatchSymbolsWhereInput
+}
+
+
+/**
+ * WatchSymbols without action
+ */
+export type WatchSymbolsArgs = {
+  /**
+   * Select specific fields to fetch from the WatchSymbols
+  **/
+  select?: WatchSymbolsSelect | null
+  /**
+   * Choose, which related nodes to fetch as well.
+  **/
+  include?: WatchSymbolsInclude | null
 }
 
 
@@ -908,38 +2623,180 @@ export type LessonsArgs = {
  */
 
 
-export type LessonsWhereInput = {
-  AND?: LessonsWhereInput | Enumerable<LessonsWhereInput>
-  OR?: LessonsWhereInput | Enumerable<LessonsWhereInput>
-  NOT?: LessonsWhereInput | Enumerable<LessonsWhereInput>
+export type LessonWhereInput = {
+  AND?: LessonWhereInput | Enumerable<LessonWhereInput>
+  OR?: LessonWhereInput | Enumerable<LessonWhereInput>
+  NOT?: LessonWhereInput | Enumerable<LessonWhereInput>
   id?: IntFilter | number
   createdAt?: DateTimeFilter | Date | string
   description?: StringFilter | string
+  postedById?: IntNullableFilter | number | null
+  postedBy?: UserRelationFilter | UserWhereInput | null
+  multimedia?: MultimediaListRelationFilter
 }
 
-export type LessonsOrderByInput = {
+export type LessonOrderByInput = {
   id?: SortOrder
   createdAt?: SortOrder
   description?: SortOrder
+  postedById?: SortOrder
 }
 
-export type LessonsWhereUniqueInput = {
+export type LessonWhereUniqueInput = {
   id?: number
 }
 
-export type LessonsCreateInput = {
+export type MultimediaWhereInput = {
+  AND?: MultimediaWhereInput | Enumerable<MultimediaWhereInput>
+  OR?: MultimediaWhereInput | Enumerable<MultimediaWhereInput>
+  NOT?: MultimediaWhereInput | Enumerable<MultimediaWhereInput>
+  id?: IntFilter | number
+  url?: StringFilter | string
+  createdAt?: DateTimeFilter | Date | string
+  lesson?: LessonRelationFilter | LessonWhereInput | null
+  lessonId?: IntNullableFilter | number | null
+}
+
+export type MultimediaOrderByInput = {
+  id?: SortOrder
+  url?: SortOrder
+  createdAt?: SortOrder
+  lessonId?: SortOrder
+}
+
+export type MultimediaWhereUniqueInput = {
+  id?: number
+}
+
+export type UserWhereInput = {
+  AND?: UserWhereInput | Enumerable<UserWhereInput>
+  OR?: UserWhereInput | Enumerable<UserWhereInput>
+  NOT?: UserWhereInput | Enumerable<UserWhereInput>
+  id?: IntFilter | number
+  name?: StringFilter | string
+  email?: StringFilter | string
+  password?: StringFilter | string
+  lessons?: LessonListRelationFilter
+  watchSymbols?: WatchSymbolsListRelationFilter
+}
+
+export type UserOrderByInput = {
+  id?: SortOrder
+  name?: SortOrder
+  email?: SortOrder
+  password?: SortOrder
+}
+
+export type UserWhereUniqueInput = {
+  id?: number
+  email?: string
+}
+
+export type WatchSymbolsWhereInput = {
+  AND?: WatchSymbolsWhereInput | Enumerable<WatchSymbolsWhereInput>
+  OR?: WatchSymbolsWhereInput | Enumerable<WatchSymbolsWhereInput>
+  NOT?: WatchSymbolsWhereInput | Enumerable<WatchSymbolsWhereInput>
+  id?: IntFilter | number
+  symbol?: StringFilter | string
+  amount?: StringFilter | string
+  phone?: StringFilter | string
+  createdAt?: DateTimeFilter | Date | string
+  postedById?: IntNullableFilter | number | null
+  postedBy?: UserRelationFilter | UserWhereInput | null
+}
+
+export type WatchSymbolsOrderByInput = {
+  id?: SortOrder
+  symbol?: SortOrder
+  amount?: SortOrder
+  phone?: SortOrder
+  createdAt?: SortOrder
+  postedById?: SortOrder
+}
+
+export type WatchSymbolsWhereUniqueInput = {
+  id?: number
+}
+
+export type LessonCreateInput = {
   createdAt?: Date | string
   description: string
+  postedBy?: UserCreateOneWithoutLessonsInput
+  multimedia?: MultimediaCreateManyWithoutLessonInput
 }
 
-export type LessonsUpdateInput = {
+export type LessonUpdateInput = {
+  createdAt?: Date | string | DateTimeFieldUpdateOperationsInput
+  description?: string | StringFieldUpdateOperationsInput
+  postedBy?: UserUpdateOneWithoutLessonsInput
+  multimedia?: MultimediaUpdateManyWithoutLessonInput
+}
+
+export type LessonUpdateManyMutationInput = {
   createdAt?: Date | string | DateTimeFieldUpdateOperationsInput
   description?: string | StringFieldUpdateOperationsInput
 }
 
-export type LessonsUpdateManyMutationInput = {
+export type MultimediaCreateInput = {
+  url: string
+  createdAt?: Date | string
+  lesson?: LessonCreateOneWithoutMultimediaInput
+}
+
+export type MultimediaUpdateInput = {
+  url?: string | StringFieldUpdateOperationsInput
   createdAt?: Date | string | DateTimeFieldUpdateOperationsInput
-  description?: string | StringFieldUpdateOperationsInput
+  lesson?: LessonUpdateOneWithoutMultimediaInput
+}
+
+export type MultimediaUpdateManyMutationInput = {
+  url?: string | StringFieldUpdateOperationsInput
+  createdAt?: Date | string | DateTimeFieldUpdateOperationsInput
+}
+
+export type UserCreateInput = {
+  name: string
+  email: string
+  password: string
+  lessons?: LessonCreateManyWithoutPostedByInput
+  watchSymbols?: WatchSymbolsCreateManyWithoutPostedByInput
+}
+
+export type UserUpdateInput = {
+  name?: string | StringFieldUpdateOperationsInput
+  email?: string | StringFieldUpdateOperationsInput
+  password?: string | StringFieldUpdateOperationsInput
+  lessons?: LessonUpdateManyWithoutPostedByInput
+  watchSymbols?: WatchSymbolsUpdateManyWithoutPostedByInput
+}
+
+export type UserUpdateManyMutationInput = {
+  name?: string | StringFieldUpdateOperationsInput
+  email?: string | StringFieldUpdateOperationsInput
+  password?: string | StringFieldUpdateOperationsInput
+}
+
+export type WatchSymbolsCreateInput = {
+  symbol: string
+  amount?: string
+  phone?: string
+  createdAt?: Date | string
+  postedBy?: UserCreateOneWithoutWatchSymbolsInput
+}
+
+export type WatchSymbolsUpdateInput = {
+  symbol?: string | StringFieldUpdateOperationsInput
+  amount?: string | StringFieldUpdateOperationsInput
+  phone?: string | StringFieldUpdateOperationsInput
+  createdAt?: Date | string | DateTimeFieldUpdateOperationsInput
+  postedBy?: UserUpdateOneWithoutWatchSymbolsInput
+}
+
+export type WatchSymbolsUpdateManyMutationInput = {
+  symbol?: string | StringFieldUpdateOperationsInput
+  amount?: string | StringFieldUpdateOperationsInput
+  phone?: string | StringFieldUpdateOperationsInput
+  createdAt?: Date | string | DateTimeFieldUpdateOperationsInput
 }
 
 export type IntFilter = {
@@ -978,12 +2835,144 @@ export type StringFilter = {
   not?: string | NestedStringFilter
 }
 
+export type IntNullableFilter = {
+  equals?: number | null
+  in?: Enumerable<number> | null
+  notIn?: Enumerable<number> | null
+  lt?: number
+  lte?: number
+  gt?: number
+  gte?: number
+  not?: number | NestedIntNullableFilter | null
+}
+
+export type UserRelationFilter = {
+  is?: UserWhereInput | null
+  isNot?: UserWhereInput | null
+}
+
+export type MultimediaListRelationFilter = {
+  every?: MultimediaWhereInput
+  some?: MultimediaWhereInput
+  none?: MultimediaWhereInput
+}
+
+export type LessonRelationFilter = {
+  is?: LessonWhereInput | null
+  isNot?: LessonWhereInput | null
+}
+
+export type LessonListRelationFilter = {
+  every?: LessonWhereInput
+  some?: LessonWhereInput
+  none?: LessonWhereInput
+}
+
+export type WatchSymbolsListRelationFilter = {
+  every?: WatchSymbolsWhereInput
+  some?: WatchSymbolsWhereInput
+  none?: WatchSymbolsWhereInput
+}
+
+export type UserCreateOneWithoutLessonsInput = {
+  create?: UserCreateWithoutLessonsInput
+  connect?: UserWhereUniqueInput
+}
+
+export type MultimediaCreateManyWithoutLessonInput = {
+  create?: MultimediaCreateWithoutLessonInput | Enumerable<MultimediaCreateWithoutLessonInput>
+  connect?: MultimediaWhereUniqueInput | Enumerable<MultimediaWhereUniqueInput>
+}
+
 export type DateTimeFieldUpdateOperationsInput = {
   set?: Date | string
 }
 
 export type StringFieldUpdateOperationsInput = {
   set?: string
+}
+
+export type UserUpdateOneWithoutLessonsInput = {
+  create?: UserCreateWithoutLessonsInput
+  connect?: UserWhereUniqueInput
+  disconnect?: boolean
+  delete?: boolean
+  update?: UserUpdateWithoutLessonsDataInput
+  upsert?: UserUpsertWithoutLessonsInput
+}
+
+export type MultimediaUpdateManyWithoutLessonInput = {
+  create?: MultimediaCreateWithoutLessonInput | Enumerable<MultimediaCreateWithoutLessonInput>
+  connect?: MultimediaWhereUniqueInput | Enumerable<MultimediaWhereUniqueInput>
+  set?: MultimediaWhereUniqueInput | Enumerable<MultimediaWhereUniqueInput>
+  disconnect?: MultimediaWhereUniqueInput | Enumerable<MultimediaWhereUniqueInput>
+  delete?: MultimediaWhereUniqueInput | Enumerable<MultimediaWhereUniqueInput>
+  update?: MultimediaUpdateWithWhereUniqueWithoutLessonInput | Enumerable<MultimediaUpdateWithWhereUniqueWithoutLessonInput>
+  updateMany?: MultimediaUpdateManyWithWhereNestedInput | Enumerable<MultimediaUpdateManyWithWhereNestedInput>
+  deleteMany?: MultimediaScalarWhereInput | Enumerable<MultimediaScalarWhereInput>
+  upsert?: MultimediaUpsertWithWhereUniqueWithoutLessonInput | Enumerable<MultimediaUpsertWithWhereUniqueWithoutLessonInput>
+}
+
+export type LessonCreateOneWithoutMultimediaInput = {
+  create?: LessonCreateWithoutMultimediaInput
+  connect?: LessonWhereUniqueInput
+}
+
+export type LessonUpdateOneWithoutMultimediaInput = {
+  create?: LessonCreateWithoutMultimediaInput
+  connect?: LessonWhereUniqueInput
+  disconnect?: boolean
+  delete?: boolean
+  update?: LessonUpdateWithoutMultimediaDataInput
+  upsert?: LessonUpsertWithoutMultimediaInput
+}
+
+export type LessonCreateManyWithoutPostedByInput = {
+  create?: LessonCreateWithoutPostedByInput | Enumerable<LessonCreateWithoutPostedByInput>
+  connect?: LessonWhereUniqueInput | Enumerable<LessonWhereUniqueInput>
+}
+
+export type WatchSymbolsCreateManyWithoutPostedByInput = {
+  create?: WatchSymbolsCreateWithoutPostedByInput | Enumerable<WatchSymbolsCreateWithoutPostedByInput>
+  connect?: WatchSymbolsWhereUniqueInput | Enumerable<WatchSymbolsWhereUniqueInput>
+}
+
+export type LessonUpdateManyWithoutPostedByInput = {
+  create?: LessonCreateWithoutPostedByInput | Enumerable<LessonCreateWithoutPostedByInput>
+  connect?: LessonWhereUniqueInput | Enumerable<LessonWhereUniqueInput>
+  set?: LessonWhereUniqueInput | Enumerable<LessonWhereUniqueInput>
+  disconnect?: LessonWhereUniqueInput | Enumerable<LessonWhereUniqueInput>
+  delete?: LessonWhereUniqueInput | Enumerable<LessonWhereUniqueInput>
+  update?: LessonUpdateWithWhereUniqueWithoutPostedByInput | Enumerable<LessonUpdateWithWhereUniqueWithoutPostedByInput>
+  updateMany?: LessonUpdateManyWithWhereNestedInput | Enumerable<LessonUpdateManyWithWhereNestedInput>
+  deleteMany?: LessonScalarWhereInput | Enumerable<LessonScalarWhereInput>
+  upsert?: LessonUpsertWithWhereUniqueWithoutPostedByInput | Enumerable<LessonUpsertWithWhereUniqueWithoutPostedByInput>
+}
+
+export type WatchSymbolsUpdateManyWithoutPostedByInput = {
+  create?: WatchSymbolsCreateWithoutPostedByInput | Enumerable<WatchSymbolsCreateWithoutPostedByInput>
+  connect?: WatchSymbolsWhereUniqueInput | Enumerable<WatchSymbolsWhereUniqueInput>
+  set?: WatchSymbolsWhereUniqueInput | Enumerable<WatchSymbolsWhereUniqueInput>
+  disconnect?: WatchSymbolsWhereUniqueInput | Enumerable<WatchSymbolsWhereUniqueInput>
+  delete?: WatchSymbolsWhereUniqueInput | Enumerable<WatchSymbolsWhereUniqueInput>
+  update?: WatchSymbolsUpdateWithWhereUniqueWithoutPostedByInput | Enumerable<WatchSymbolsUpdateWithWhereUniqueWithoutPostedByInput>
+  updateMany?: WatchSymbolsUpdateManyWithWhereNestedInput | Enumerable<WatchSymbolsUpdateManyWithWhereNestedInput>
+  deleteMany?: WatchSymbolsScalarWhereInput | Enumerable<WatchSymbolsScalarWhereInput>
+  upsert?: WatchSymbolsUpsertWithWhereUniqueWithoutPostedByInput | Enumerable<WatchSymbolsUpsertWithWhereUniqueWithoutPostedByInput>
+}
+
+export type UserCreateOneWithoutWatchSymbolsInput = {
+  create?: UserCreateWithoutWatchSymbolsInput
+  connect?: UserWhereUniqueInput
+}
+
+export type UserUpdateOneWithoutWatchSymbolsInput = {
+  create?: UserCreateWithoutWatchSymbolsInput
+  connect?: UserWhereUniqueInput
+  disconnect?: boolean
+  delete?: boolean
+  update?: UserUpdateWithoutWatchSymbolsDataInput
+  upsert?: UserUpsertWithoutWatchSymbolsInput
 }
 
 export type NestedIntFilter = {
@@ -1020,6 +3009,205 @@ export type NestedStringFilter = {
   startsWith?: string
   endsWith?: string
   not?: string | NestedStringFilter
+}
+
+export type NestedIntNullableFilter = {
+  equals?: number | null
+  in?: Enumerable<number> | null
+  notIn?: Enumerable<number> | null
+  lt?: number
+  lte?: number
+  gt?: number
+  gte?: number
+  not?: number | NestedIntNullableFilter | null
+}
+
+export type UserCreateWithoutLessonsInput = {
+  name: string
+  email: string
+  password: string
+  watchSymbols?: WatchSymbolsCreateManyWithoutPostedByInput
+}
+
+export type MultimediaCreateWithoutLessonInput = {
+  url: string
+  createdAt?: Date | string
+}
+
+export type UserUpdateWithoutLessonsDataInput = {
+  name?: string | StringFieldUpdateOperationsInput
+  email?: string | StringFieldUpdateOperationsInput
+  password?: string | StringFieldUpdateOperationsInput
+  watchSymbols?: WatchSymbolsUpdateManyWithoutPostedByInput
+}
+
+export type UserUpsertWithoutLessonsInput = {
+  update: UserUpdateWithoutLessonsDataInput
+  create: UserCreateWithoutLessonsInput
+}
+
+export type MultimediaUpdateWithWhereUniqueWithoutLessonInput = {
+  where: MultimediaWhereUniqueInput
+  data: MultimediaUpdateWithoutLessonDataInput
+}
+
+export type MultimediaUpdateManyWithWhereNestedInput = {
+  where: MultimediaScalarWhereInput
+  data: MultimediaUpdateManyDataInput
+}
+
+export type MultimediaScalarWhereInput = {
+  AND?: MultimediaScalarWhereInput | Enumerable<MultimediaScalarWhereInput>
+  OR?: MultimediaScalarWhereInput | Enumerable<MultimediaScalarWhereInput>
+  NOT?: MultimediaScalarWhereInput | Enumerable<MultimediaScalarWhereInput>
+  id?: IntFilter | number
+  url?: StringFilter | string
+  createdAt?: DateTimeFilter | Date | string
+  lessonId?: IntNullableFilter | number | null
+}
+
+export type MultimediaUpsertWithWhereUniqueWithoutLessonInput = {
+  where: MultimediaWhereUniqueInput
+  update: MultimediaUpdateWithoutLessonDataInput
+  create: MultimediaCreateWithoutLessonInput
+}
+
+export type LessonCreateWithoutMultimediaInput = {
+  createdAt?: Date | string
+  description: string
+  postedBy?: UserCreateOneWithoutLessonsInput
+}
+
+export type LessonUpdateWithoutMultimediaDataInput = {
+  createdAt?: Date | string | DateTimeFieldUpdateOperationsInput
+  description?: string | StringFieldUpdateOperationsInput
+  postedBy?: UserUpdateOneWithoutLessonsInput
+}
+
+export type LessonUpsertWithoutMultimediaInput = {
+  update: LessonUpdateWithoutMultimediaDataInput
+  create: LessonCreateWithoutMultimediaInput
+}
+
+export type LessonCreateWithoutPostedByInput = {
+  createdAt?: Date | string
+  description: string
+  multimedia?: MultimediaCreateManyWithoutLessonInput
+}
+
+export type WatchSymbolsCreateWithoutPostedByInput = {
+  symbol: string
+  amount?: string
+  phone?: string
+  createdAt?: Date | string
+}
+
+export type LessonUpdateWithWhereUniqueWithoutPostedByInput = {
+  where: LessonWhereUniqueInput
+  data: LessonUpdateWithoutPostedByDataInput
+}
+
+export type LessonUpdateManyWithWhereNestedInput = {
+  where: LessonScalarWhereInput
+  data: LessonUpdateManyDataInput
+}
+
+export type LessonScalarWhereInput = {
+  AND?: LessonScalarWhereInput | Enumerable<LessonScalarWhereInput>
+  OR?: LessonScalarWhereInput | Enumerable<LessonScalarWhereInput>
+  NOT?: LessonScalarWhereInput | Enumerable<LessonScalarWhereInput>
+  id?: IntFilter | number
+  createdAt?: DateTimeFilter | Date | string
+  description?: StringFilter | string
+  postedById?: IntNullableFilter | number | null
+}
+
+export type LessonUpsertWithWhereUniqueWithoutPostedByInput = {
+  where: LessonWhereUniqueInput
+  update: LessonUpdateWithoutPostedByDataInput
+  create: LessonCreateWithoutPostedByInput
+}
+
+export type WatchSymbolsUpdateWithWhereUniqueWithoutPostedByInput = {
+  where: WatchSymbolsWhereUniqueInput
+  data: WatchSymbolsUpdateWithoutPostedByDataInput
+}
+
+export type WatchSymbolsUpdateManyWithWhereNestedInput = {
+  where: WatchSymbolsScalarWhereInput
+  data: WatchSymbolsUpdateManyDataInput
+}
+
+export type WatchSymbolsScalarWhereInput = {
+  AND?: WatchSymbolsScalarWhereInput | Enumerable<WatchSymbolsScalarWhereInput>
+  OR?: WatchSymbolsScalarWhereInput | Enumerable<WatchSymbolsScalarWhereInput>
+  NOT?: WatchSymbolsScalarWhereInput | Enumerable<WatchSymbolsScalarWhereInput>
+  id?: IntFilter | number
+  symbol?: StringFilter | string
+  amount?: StringFilter | string
+  phone?: StringFilter | string
+  createdAt?: DateTimeFilter | Date | string
+  postedById?: IntNullableFilter | number | null
+}
+
+export type WatchSymbolsUpsertWithWhereUniqueWithoutPostedByInput = {
+  where: WatchSymbolsWhereUniqueInput
+  update: WatchSymbolsUpdateWithoutPostedByDataInput
+  create: WatchSymbolsCreateWithoutPostedByInput
+}
+
+export type UserCreateWithoutWatchSymbolsInput = {
+  name: string
+  email: string
+  password: string
+  lessons?: LessonCreateManyWithoutPostedByInput
+}
+
+export type UserUpdateWithoutWatchSymbolsDataInput = {
+  name?: string | StringFieldUpdateOperationsInput
+  email?: string | StringFieldUpdateOperationsInput
+  password?: string | StringFieldUpdateOperationsInput
+  lessons?: LessonUpdateManyWithoutPostedByInput
+}
+
+export type UserUpsertWithoutWatchSymbolsInput = {
+  update: UserUpdateWithoutWatchSymbolsDataInput
+  create: UserCreateWithoutWatchSymbolsInput
+}
+
+export type MultimediaUpdateWithoutLessonDataInput = {
+  url?: string | StringFieldUpdateOperationsInput
+  createdAt?: Date | string | DateTimeFieldUpdateOperationsInput
+}
+
+export type MultimediaUpdateManyDataInput = {
+  url?: string | StringFieldUpdateOperationsInput
+  createdAt?: Date | string | DateTimeFieldUpdateOperationsInput
+}
+
+export type LessonUpdateWithoutPostedByDataInput = {
+  createdAt?: Date | string | DateTimeFieldUpdateOperationsInput
+  description?: string | StringFieldUpdateOperationsInput
+  multimedia?: MultimediaUpdateManyWithoutLessonInput
+}
+
+export type LessonUpdateManyDataInput = {
+  createdAt?: Date | string | DateTimeFieldUpdateOperationsInput
+  description?: string | StringFieldUpdateOperationsInput
+}
+
+export type WatchSymbolsUpdateWithoutPostedByDataInput = {
+  symbol?: string | StringFieldUpdateOperationsInput
+  amount?: string | StringFieldUpdateOperationsInput
+  phone?: string | StringFieldUpdateOperationsInput
+  createdAt?: Date | string | DateTimeFieldUpdateOperationsInput
+}
+
+export type WatchSymbolsUpdateManyDataInput = {
+  symbol?: string | StringFieldUpdateOperationsInput
+  amount?: string | StringFieldUpdateOperationsInput
+  phone?: string | StringFieldUpdateOperationsInput
+  createdAt?: Date | string | DateTimeFieldUpdateOperationsInput
 }
 
 /**
