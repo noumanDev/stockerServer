@@ -1,6 +1,6 @@
 datasource db {
     provider = "sqlite"
-    url      = "file:./dev.db"
+    url = "***"
   
 }
 
@@ -47,7 +47,6 @@ model WatchSymbols {
   
 }
 
-
 model sms {
     id          Int          @id @default(autoincrement())
     symbol      String
@@ -55,5 +54,4 @@ model sms {
     phone       String       @default("")
     createdAt   DateTime     @default(now())
     sent        Boolean      @default(false)
-    onceDaily   String       @unique
 }

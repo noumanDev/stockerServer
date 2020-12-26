@@ -46,3 +46,14 @@ model WatchSymbols {
     postedBy    User?        @relation(fields: [postedById], references: [id])
   
 }
+
+
+model sms {
+    id          Int          @id @default(autoincrement())
+    symbol      String
+    amount      String       @default("")
+    phone       String       @default("")
+    createdAt   DateTime     @default(now())
+    sent        Boolean      @default(false)
+    onceDaily   String       @unique
+}

@@ -428,6 +428,16 @@ export declare class PrismaClient<
     * ```
     */
   get watchSymbols(): WatchSymbolsDelegate;
+
+  /**
+   * `prisma.sms`: Exposes CRUD operations for the **sms** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Sms
+    * const sms = await prisma.sms.findMany()
+    * ```
+    */
+  get sms(): smsDelegate;
 }
 
 
@@ -479,6 +489,19 @@ export declare const WatchSymbolsDistinctFieldEnum: {
 };
 
 export declare type WatchSymbolsDistinctFieldEnum = (typeof WatchSymbolsDistinctFieldEnum)[keyof typeof WatchSymbolsDistinctFieldEnum]
+
+
+export declare const SmsDistinctFieldEnum: {
+  id: 'id',
+  symbol: 'symbol',
+  amount: 'amount',
+  phone: 'phone',
+  createdAt: 'createdAt',
+  sent: 'sent',
+  onceDaily: 'onceDaily'
+};
+
+export declare type SmsDistinctFieldEnum = (typeof SmsDistinctFieldEnum)[keyof typeof SmsDistinctFieldEnum]
 
 
 export declare const SortOrder: {
@@ -2619,6 +2642,490 @@ export type WatchSymbolsArgs = {
 
 
 /**
+ * Model sms
+ */
+
+export type sms = {
+  id: number
+  symbol: string
+  amount: string
+  phone: string
+  createdAt: Date
+  sent: boolean
+  onceDaily: string
+}
+
+
+export type AggregateSms = {
+  count: number
+  avg: SmsAvgAggregateOutputType | null
+  sum: SmsSumAggregateOutputType | null
+  min: SmsMinAggregateOutputType | null
+  max: SmsMaxAggregateOutputType | null
+}
+
+export type SmsAvgAggregateOutputType = {
+  id: number
+}
+
+export type SmsSumAggregateOutputType = {
+  id: number
+}
+
+export type SmsMinAggregateOutputType = {
+  id: number
+}
+
+export type SmsMaxAggregateOutputType = {
+  id: number
+}
+
+
+export type SmsAvgAggregateInputType = {
+  id?: true
+}
+
+export type SmsSumAggregateInputType = {
+  id?: true
+}
+
+export type SmsMinAggregateInputType = {
+  id?: true
+}
+
+export type SmsMaxAggregateInputType = {
+  id?: true
+}
+
+export type AggregateSmsArgs = {
+  where?: smsWhereInput
+  orderBy?: Enumerable<smsOrderByInput> | smsOrderByInput
+  cursor?: smsWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Enumerable<SmsDistinctFieldEnum>
+  count?: true
+  avg?: SmsAvgAggregateInputType
+  sum?: SmsSumAggregateInputType
+  min?: SmsMinAggregateInputType
+  max?: SmsMaxAggregateInputType
+}
+
+export type GetSmsAggregateType<T extends AggregateSmsArgs> = {
+  [P in keyof T]: P extends 'count' ? number : GetSmsAggregateScalarType<T[P]>
+}
+
+export type GetSmsAggregateScalarType<T extends any> = {
+  [P in keyof T]: P extends keyof SmsAvgAggregateOutputType ? SmsAvgAggregateOutputType[P] : never
+}
+    
+    
+
+export type smsSelect = {
+  id?: boolean
+  symbol?: boolean
+  amount?: boolean
+  phone?: boolean
+  createdAt?: boolean
+  sent?: boolean
+  onceDaily?: boolean
+}
+
+export type smsGetPayload<
+  S extends boolean | null | undefined | smsArgs,
+  U = keyof S
+> = S extends true
+  ? sms
+  : S extends undefined
+  ? never
+  : S extends smsArgs | FindManysmsArgs
+  ? 'include' extends U
+    ? sms 
+  : 'select' extends U
+    ? {
+      [P in TrueKeys<S['select']>]:P extends keyof sms ? sms[P]
+: 
+ never
+    }
+  : sms
+: sms
+
+
+export interface smsDelegate {
+  /**
+   * Find zero or one Sms that matches the filter.
+   * @param {FindOnesmsArgs} args - Arguments to find a Sms
+   * @example
+   * // Get one Sms
+   * const sms = await prisma.sms.findOne({
+   *   where: {
+   *     // ... provide filter here
+   *   }
+   * })
+  **/
+  findOne<T extends FindOnesmsArgs>(
+    args: Subset<T, FindOnesmsArgs>
+  ): CheckSelect<T, Prisma__smsClient<sms | null>, Prisma__smsClient<smsGetPayload<T> | null>>
+  /**
+   * Find the first Sms that matches the filter.
+   * @param {FindFirstsmsArgs} args - Arguments to find a Sms
+   * @example
+   * // Get one Sms
+   * const sms = await prisma.sms.findFirst({
+   *   where: {
+   *     // ... provide filter here
+   *   }
+   * })
+  **/
+  findFirst<T extends FindFirstsmsArgs>(
+    args: Subset<T, FindFirstsmsArgs>
+  ): CheckSelect<T, Prisma__smsClient<sms>, Prisma__smsClient<smsGetPayload<T>>>
+  /**
+   * Find zero or more Sms that matches the filter.
+   * @param {FindManysmsArgs=} args - Arguments to filter and select certain fields only.
+   * @example
+   * // Get all Sms
+   * const sms = await prisma.sms.findMany()
+   * 
+   * // Get first 10 Sms
+   * const sms = await prisma.sms.findMany({ take: 10 })
+   * 
+   * // Only select the `id`
+   * const smsWithIdOnly = await prisma.sms.findMany({ select: { id: true } })
+   * 
+  **/
+  findMany<T extends FindManysmsArgs>(
+    args?: Subset<T, FindManysmsArgs>
+  ): CheckSelect<T, Promise<Array<sms>>, Promise<Array<smsGetPayload<T>>>>
+  /**
+   * Create a Sms.
+   * @param {smsCreateArgs} args - Arguments to create a Sms.
+   * @example
+   * // Create one Sms
+   * const Sms = await prisma.sms.create({
+   *   data: {
+   *     // ... data to create a Sms
+   *   }
+   * })
+   * 
+  **/
+  create<T extends smsCreateArgs>(
+    args: Subset<T, smsCreateArgs>
+  ): CheckSelect<T, Prisma__smsClient<sms>, Prisma__smsClient<smsGetPayload<T>>>
+  /**
+   * Delete a Sms.
+   * @param {smsDeleteArgs} args - Arguments to delete one Sms.
+   * @example
+   * // Delete one Sms
+   * const Sms = await prisma.sms.delete({
+   *   where: {
+   *     // ... filter to delete one Sms
+   *   }
+   * })
+   * 
+  **/
+  delete<T extends smsDeleteArgs>(
+    args: Subset<T, smsDeleteArgs>
+  ): CheckSelect<T, Prisma__smsClient<sms>, Prisma__smsClient<smsGetPayload<T>>>
+  /**
+   * Update one Sms.
+   * @param {smsUpdateArgs} args - Arguments to update one Sms.
+   * @example
+   * // Update one Sms
+   * const sms = await prisma.sms.update({
+   *   where: {
+   *     // ... provide filter here
+   *   },
+   *   data: {
+   *     // ... provide data here
+   *   }
+   * })
+   * 
+  **/
+  update<T extends smsUpdateArgs>(
+    args: Subset<T, smsUpdateArgs>
+  ): CheckSelect<T, Prisma__smsClient<sms>, Prisma__smsClient<smsGetPayload<T>>>
+  /**
+   * Delete zero or more Sms.
+   * @param {smsDeleteManyArgs} args - Arguments to filter Sms to delete.
+   * @example
+   * // Delete a few Sms
+   * const { count } = await prisma.sms.deleteMany({
+   *   where: {
+   *     // ... provide filter here
+   *   }
+   * })
+   * 
+  **/
+  deleteMany<T extends smsDeleteManyArgs>(
+    args: Subset<T, smsDeleteManyArgs>
+  ): Promise<BatchPayload>
+  /**
+   * Update zero or more Sms.
+   * @param {smsUpdateManyArgs} args - Arguments to update one or more rows.
+   * @example
+   * // Update many Sms
+   * const sms = await prisma.sms.updateMany({
+   *   where: {
+   *     // ... provide filter here
+   *   },
+   *   data: {
+   *     // ... provide data here
+   *   }
+   * })
+   * 
+  **/
+  updateMany<T extends smsUpdateManyArgs>(
+    args: Subset<T, smsUpdateManyArgs>
+  ): Promise<BatchPayload>
+  /**
+   * Create or update one Sms.
+   * @param {smsUpsertArgs} args - Arguments to update or create a Sms.
+   * @example
+   * // Update or create a Sms
+   * const sms = await prisma.sms.upsert({
+   *   create: {
+   *     // ... data to create a Sms
+   *   },
+   *   update: {
+   *     // ... in case it already exists, update
+   *   },
+   *   where: {
+   *     // ... the filter for the Sms we want to update
+   *   }
+   * })
+  **/
+  upsert<T extends smsUpsertArgs>(
+    args: Subset<T, smsUpsertArgs>
+  ): CheckSelect<T, Prisma__smsClient<sms>, Prisma__smsClient<smsGetPayload<T>>>
+  /**
+   * Count
+   */
+  count(args?: Omit<FindManysmsArgs, 'select' | 'include'>): Promise<number>
+
+  /**
+   * Aggregate
+   */
+  aggregate<T extends AggregateSmsArgs>(args: Subset<T, AggregateSmsArgs>): Promise<GetSmsAggregateType<T>>
+}
+
+/**
+ * The delegate class that acts as a "Promise-like" for sms.
+ * Why is this prefixed with `Prisma__`?
+ * Because we want to prevent naming conflicts as mentioned in 
+ * https://github.com/prisma/prisma-client-js/issues/707
+ */
+export declare class Prisma__smsClient<T> implements Promise<T> {
+  private readonly _dmmf;
+  private readonly _fetcher;
+  private readonly _queryType;
+  private readonly _rootField;
+  private readonly _clientMethod;
+  private readonly _args;
+  private readonly _dataPath;
+  private readonly _errorFormat;
+  private readonly _measurePerformance?;
+  private _isList;
+  private _callsite;
+  private _requestPromise?;
+  constructor(_dmmf: DMMFClass, _fetcher: PrismaClientFetcher, _queryType: 'query' | 'mutation', _rootField: string, _clientMethod: string, _args: any, _dataPath: string[], _errorFormat: ErrorFormat, _measurePerformance?: boolean | undefined, _isList?: boolean);
+  readonly [Symbol.toStringTag]: 'PrismaClientPromise';
+
+
+  private get _document();
+  /**
+   * Attaches callbacks for the resolution and/or rejection of the Promise.
+   * @param onfulfilled The callback to execute when the Promise is resolved.
+   * @param onrejected The callback to execute when the Promise is rejected.
+   * @returns A Promise for the completion of which ever callback is executed.
+   */
+  then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | Promise<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | Promise<TResult2>) | undefined | null): Promise<TResult1 | TResult2>;
+  /**
+   * Attaches a callback for only the rejection of the Promise.
+   * @param onrejected The callback to execute when the Promise is rejected.
+   * @returns A Promise for the completion of the callback.
+   */
+  catch<TResult = never>(onrejected?: ((reason: any) => TResult | Promise<TResult>) | undefined | null): Promise<T | TResult>;
+  /**
+   * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+   * resolved value cannot be modified from the callback.
+   * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+   * @returns A Promise for the completion of the callback.
+   */
+  finally(onfinally?: (() => void) | undefined | null): Promise<T>;
+}
+
+// Custom InputTypes
+
+/**
+ * sms findOne
+ */
+export type FindOnesmsArgs = {
+  /**
+   * Select specific fields to fetch from the sms
+  **/
+  select?: smsSelect | null
+  /**
+   * Filter, which sms to fetch.
+  **/
+  where: smsWhereUniqueInput
+}
+
+
+/**
+ * sms findFirst
+ */
+export type FindFirstsmsArgs = {
+  /**
+   * Select specific fields to fetch from the sms
+  **/
+  select?: smsSelect | null
+  /**
+   * Filter, which sms to fetch.
+  **/
+  where?: smsWhereInput
+  orderBy?: Enumerable<smsOrderByInput> | smsOrderByInput
+  cursor?: smsWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Enumerable<SmsDistinctFieldEnum>
+}
+
+
+/**
+ * sms findMany
+ */
+export type FindManysmsArgs = {
+  /**
+   * Select specific fields to fetch from the sms
+  **/
+  select?: smsSelect | null
+  /**
+   * Filter, which sms to fetch.
+  **/
+  where?: smsWhereInput
+  /**
+   * Determine the order of the sms to fetch.
+  **/
+  orderBy?: Enumerable<smsOrderByInput> | smsOrderByInput
+  /**
+   * Sets the position for listing sms.
+  **/
+  cursor?: smsWhereUniqueInput
+  /**
+   * The number of sms to fetch. If negative number, it will take sms before the `cursor`.
+  **/
+  take?: number
+  /**
+   * Skip the first `n` sms.
+  **/
+  skip?: number
+  distinct?: Enumerable<SmsDistinctFieldEnum>
+}
+
+
+/**
+ * sms create
+ */
+export type smsCreateArgs = {
+  /**
+   * Select specific fields to fetch from the sms
+  **/
+  select?: smsSelect | null
+  /**
+   * The data needed to create a sms.
+  **/
+  data: smsCreateInput
+}
+
+
+/**
+ * sms update
+ */
+export type smsUpdateArgs = {
+  /**
+   * Select specific fields to fetch from the sms
+  **/
+  select?: smsSelect | null
+  /**
+   * The data needed to update a sms.
+  **/
+  data: smsUpdateInput
+  /**
+   * Choose, which sms to update.
+  **/
+  where: smsWhereUniqueInput
+}
+
+
+/**
+ * sms updateMany
+ */
+export type smsUpdateManyArgs = {
+  data: smsUpdateManyMutationInput
+  where?: smsWhereInput
+}
+
+
+/**
+ * sms upsert
+ */
+export type smsUpsertArgs = {
+  /**
+   * Select specific fields to fetch from the sms
+  **/
+  select?: smsSelect | null
+  /**
+   * The filter to search for the sms to update in case it exists.
+  **/
+  where: smsWhereUniqueInput
+  /**
+   * In case the sms found by the `where` argument doesn't exist, create a new sms with this data.
+  **/
+  create: smsCreateInput
+  /**
+   * In case the sms was found with the provided `where` argument, update it with this data.
+  **/
+  update: smsUpdateInput
+}
+
+
+/**
+ * sms delete
+ */
+export type smsDeleteArgs = {
+  /**
+   * Select specific fields to fetch from the sms
+  **/
+  select?: smsSelect | null
+  /**
+   * Filter which sms to delete.
+  **/
+  where: smsWhereUniqueInput
+}
+
+
+/**
+ * sms deleteMany
+ */
+export type smsDeleteManyArgs = {
+  where?: smsWhereInput
+}
+
+
+/**
+ * sms without action
+ */
+export type smsArgs = {
+  /**
+   * Select specific fields to fetch from the sms
+  **/
+  select?: smsSelect | null
+}
+
+
+
+/**
  * Deep Input Types
  */
 
@@ -2718,6 +3225,34 @@ export type WatchSymbolsWhereUniqueInput = {
   id?: number
 }
 
+export type smsWhereInput = {
+  AND?: smsWhereInput | Enumerable<smsWhereInput>
+  OR?: smsWhereInput | Enumerable<smsWhereInput>
+  NOT?: smsWhereInput | Enumerable<smsWhereInput>
+  id?: IntFilter | number
+  symbol?: StringFilter | string
+  amount?: StringFilter | string
+  phone?: StringFilter | string
+  createdAt?: DateTimeFilter | Date | string
+  sent?: BoolFilter | boolean
+  onceDaily?: StringFilter | string
+}
+
+export type smsOrderByInput = {
+  id?: SortOrder
+  symbol?: SortOrder
+  amount?: SortOrder
+  phone?: SortOrder
+  createdAt?: SortOrder
+  sent?: SortOrder
+  onceDaily?: SortOrder
+}
+
+export type smsWhereUniqueInput = {
+  id?: number
+  onceDaily?: string
+}
+
 export type LessonCreateInput = {
   createdAt?: Date | string
   description: string
@@ -2799,6 +3334,33 @@ export type WatchSymbolsUpdateManyMutationInput = {
   createdAt?: Date | string | DateTimeFieldUpdateOperationsInput
 }
 
+export type smsCreateInput = {
+  symbol: string
+  amount?: string
+  phone?: string
+  createdAt?: Date | string
+  sent?: boolean
+  onceDaily: string
+}
+
+export type smsUpdateInput = {
+  symbol?: string | StringFieldUpdateOperationsInput
+  amount?: string | StringFieldUpdateOperationsInput
+  phone?: string | StringFieldUpdateOperationsInput
+  createdAt?: Date | string | DateTimeFieldUpdateOperationsInput
+  sent?: boolean | BoolFieldUpdateOperationsInput
+  onceDaily?: string | StringFieldUpdateOperationsInput
+}
+
+export type smsUpdateManyMutationInput = {
+  symbol?: string | StringFieldUpdateOperationsInput
+  amount?: string | StringFieldUpdateOperationsInput
+  phone?: string | StringFieldUpdateOperationsInput
+  createdAt?: Date | string | DateTimeFieldUpdateOperationsInput
+  sent?: boolean | BoolFieldUpdateOperationsInput
+  onceDaily?: string | StringFieldUpdateOperationsInput
+}
+
 export type IntFilter = {
   equals?: number
   in?: Enumerable<number>
@@ -2872,6 +3434,11 @@ export type WatchSymbolsListRelationFilter = {
   every?: WatchSymbolsWhereInput
   some?: WatchSymbolsWhereInput
   none?: WatchSymbolsWhereInput
+}
+
+export type BoolFilter = {
+  equals?: boolean
+  not?: boolean | NestedBoolFilter
 }
 
 export type UserCreateOneWithoutLessonsInput = {
@@ -2975,6 +3542,10 @@ export type UserUpdateOneWithoutWatchSymbolsInput = {
   upsert?: UserUpsertWithoutWatchSymbolsInput
 }
 
+export type BoolFieldUpdateOperationsInput = {
+  set?: boolean
+}
+
 export type NestedIntFilter = {
   equals?: number
   in?: Enumerable<number>
@@ -3020,6 +3591,11 @@ export type NestedIntNullableFilter = {
   gt?: number
   gte?: number
   not?: number | NestedIntNullableFilter | null
+}
+
+export type NestedBoolFilter = {
+  equals?: boolean
+  not?: boolean | NestedBoolFilter
 }
 
 export type UserCreateWithoutLessonsInput = {

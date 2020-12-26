@@ -8,8 +8,9 @@ async function lessons(parent, args, context) {
 }
 
 async function getWatchSymbols(parent, args, context) {
+ 
   const symbols = await context.prisma.watchSymbols.findMany({
-    where: {
+    where: context.allUsers?{}: {
       postedById: getUserId(context)
     }
   });
