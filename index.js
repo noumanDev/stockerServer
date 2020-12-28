@@ -12,7 +12,7 @@ const schedulesms = require('./cronjobs/schedulesms');
 const myCache = new NodeCache();
 
 const prisma = new PrismaClient();
-schedulesms(prisma);
+schedulesms(prisma,myCache);
 
 const test = () => {
   prisma.watchSymbols.delete({

@@ -6,6 +6,7 @@ type Query {
   psxMarketWatch : [PsxEntity!]!
   getWatchSymbols : [String!]!
   getPsxSymbolStats(todayOnly:Boolean!,symbol:String!):[[String]]!
+  fetchPsxData:[[PsxEntity]]
   
 }
 
