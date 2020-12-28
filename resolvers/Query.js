@@ -36,7 +36,8 @@ async function psxMarketWatch(parent, args, context) {
   data.forEach(symbol => {
     console.log(symbol.symbol, watchSymbols[symbol.symbol]);
     symbol.watch = (watchSymbols[symbol.symbol] ? true : false);
-    symbol.amount = watchSymbols[symbol.symbol]?watchSymbols[symbol.symbol].amount:null;
+    symbol.minAmount = watchSymbols[symbol.symbol]?watchSymbols[symbol.symbol].minAmount:null;
+    symbol.maxAmount = watchSymbols[symbol.symbol]?watchSymbols[symbol.symbol].maxAmount:null;
     symbol.phone = watchSymbols[symbol.symbol]?watchSymbols[symbol.symbol].phone:null;
   });
 

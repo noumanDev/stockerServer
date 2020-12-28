@@ -482,7 +482,8 @@ export declare type UserDistinctFieldEnum = (typeof UserDistinctFieldEnum)[keyof
 export declare const WatchSymbolsDistinctFieldEnum: {
   id: 'id',
   symbol: 'symbol',
-  amount: 'amount',
+  minAmount: 'minAmount',
+  maxAmount: 'maxAmount',
   phone: 'phone',
   createdAt: 'createdAt',
   postedById: 'postedById'
@@ -493,8 +494,7 @@ export declare type WatchSymbolsDistinctFieldEnum = (typeof WatchSymbolsDistinct
 
 export declare const SmsDistinctFieldEnum: {
   id: 'id',
-  symbol: 'symbol',
-  amount: 'amount',
+  msg: 'msg',
   phone: 'phone',
   createdAt: 'createdAt',
   sent: 'sent',
@@ -2115,7 +2115,8 @@ export type UserArgs = {
 export type WatchSymbols = {
   id: number
   symbol: string
-  amount: string
+  minAmount: string
+  maxAmount: string
   phone: string
   createdAt: Date
   postedById: number | null
@@ -2198,7 +2199,8 @@ export type GetWatchSymbolsAggregateScalarType<T extends any> = {
 export type WatchSymbolsSelect = {
   id?: boolean
   symbol?: boolean
-  amount?: boolean
+  minAmount?: boolean
+  maxAmount?: boolean
   phone?: boolean
   createdAt?: boolean
   postedById?: boolean
@@ -2647,8 +2649,7 @@ export type WatchSymbolsArgs = {
 
 export type sms = {
   id: number
-  symbol: string
-  amount: string
+  msg: string
   phone: string
   createdAt: Date
   sent: boolean
@@ -2723,8 +2724,7 @@ export type GetSmsAggregateScalarType<T extends any> = {
 
 export type smsSelect = {
   id?: boolean
-  symbol?: boolean
-  amount?: boolean
+  msg?: boolean
   phone?: boolean
   createdAt?: boolean
   sent?: boolean
@@ -3205,7 +3205,8 @@ export type WatchSymbolsWhereInput = {
   NOT?: WatchSymbolsWhereInput | Enumerable<WatchSymbolsWhereInput>
   id?: IntFilter | number
   symbol?: StringFilter | string
-  amount?: StringFilter | string
+  minAmount?: StringFilter | string
+  maxAmount?: StringFilter | string
   phone?: StringFilter | string
   createdAt?: DateTimeFilter | Date | string
   postedById?: IntNullableFilter | number | null
@@ -3215,7 +3216,8 @@ export type WatchSymbolsWhereInput = {
 export type WatchSymbolsOrderByInput = {
   id?: SortOrder
   symbol?: SortOrder
-  amount?: SortOrder
+  minAmount?: SortOrder
+  maxAmount?: SortOrder
   phone?: SortOrder
   createdAt?: SortOrder
   postedById?: SortOrder
@@ -3230,8 +3232,7 @@ export type smsWhereInput = {
   OR?: smsWhereInput | Enumerable<smsWhereInput>
   NOT?: smsWhereInput | Enumerable<smsWhereInput>
   id?: IntFilter | number
-  symbol?: StringFilter | string
-  amount?: StringFilter | string
+  msg?: StringFilter | string
   phone?: StringFilter | string
   createdAt?: DateTimeFilter | Date | string
   sent?: BoolFilter | boolean
@@ -3240,8 +3241,7 @@ export type smsWhereInput = {
 
 export type smsOrderByInput = {
   id?: SortOrder
-  symbol?: SortOrder
-  amount?: SortOrder
+  msg?: SortOrder
   phone?: SortOrder
   createdAt?: SortOrder
   sent?: SortOrder
@@ -3313,7 +3313,8 @@ export type UserUpdateManyMutationInput = {
 
 export type WatchSymbolsCreateInput = {
   symbol: string
-  amount?: string
+  minAmount?: string
+  maxAmount?: string
   phone?: string
   createdAt?: Date | string
   postedBy?: UserCreateOneWithoutWatchSymbolsInput
@@ -3321,7 +3322,8 @@ export type WatchSymbolsCreateInput = {
 
 export type WatchSymbolsUpdateInput = {
   symbol?: string | StringFieldUpdateOperationsInput
-  amount?: string | StringFieldUpdateOperationsInput
+  minAmount?: string | StringFieldUpdateOperationsInput
+  maxAmount?: string | StringFieldUpdateOperationsInput
   phone?: string | StringFieldUpdateOperationsInput
   createdAt?: Date | string | DateTimeFieldUpdateOperationsInput
   postedBy?: UserUpdateOneWithoutWatchSymbolsInput
@@ -3329,14 +3331,14 @@ export type WatchSymbolsUpdateInput = {
 
 export type WatchSymbolsUpdateManyMutationInput = {
   symbol?: string | StringFieldUpdateOperationsInput
-  amount?: string | StringFieldUpdateOperationsInput
+  minAmount?: string | StringFieldUpdateOperationsInput
+  maxAmount?: string | StringFieldUpdateOperationsInput
   phone?: string | StringFieldUpdateOperationsInput
   createdAt?: Date | string | DateTimeFieldUpdateOperationsInput
 }
 
 export type smsCreateInput = {
-  symbol: string
-  amount?: string
+  msg?: string
   phone?: string
   createdAt?: Date | string
   sent?: boolean
@@ -3344,8 +3346,7 @@ export type smsCreateInput = {
 }
 
 export type smsUpdateInput = {
-  symbol?: string | StringFieldUpdateOperationsInput
-  amount?: string | StringFieldUpdateOperationsInput
+  msg?: string | StringFieldUpdateOperationsInput
   phone?: string | StringFieldUpdateOperationsInput
   createdAt?: Date | string | DateTimeFieldUpdateOperationsInput
   sent?: boolean | BoolFieldUpdateOperationsInput
@@ -3353,8 +3354,7 @@ export type smsUpdateInput = {
 }
 
 export type smsUpdateManyMutationInput = {
-  symbol?: string | StringFieldUpdateOperationsInput
-  amount?: string | StringFieldUpdateOperationsInput
+  msg?: string | StringFieldUpdateOperationsInput
   phone?: string | StringFieldUpdateOperationsInput
   createdAt?: Date | string | DateTimeFieldUpdateOperationsInput
   sent?: boolean | BoolFieldUpdateOperationsInput
@@ -3673,7 +3673,8 @@ export type LessonCreateWithoutPostedByInput = {
 
 export type WatchSymbolsCreateWithoutPostedByInput = {
   symbol: string
-  amount?: string
+  minAmount?: string
+  maxAmount?: string
   phone?: string
   createdAt?: Date | string
 }
@@ -3720,7 +3721,8 @@ export type WatchSymbolsScalarWhereInput = {
   NOT?: WatchSymbolsScalarWhereInput | Enumerable<WatchSymbolsScalarWhereInput>
   id?: IntFilter | number
   symbol?: StringFilter | string
-  amount?: StringFilter | string
+  minAmount?: StringFilter | string
+  maxAmount?: StringFilter | string
   phone?: StringFilter | string
   createdAt?: DateTimeFilter | Date | string
   postedById?: IntNullableFilter | number | null
@@ -3774,14 +3776,16 @@ export type LessonUpdateManyDataInput = {
 
 export type WatchSymbolsUpdateWithoutPostedByDataInput = {
   symbol?: string | StringFieldUpdateOperationsInput
-  amount?: string | StringFieldUpdateOperationsInput
+  minAmount?: string | StringFieldUpdateOperationsInput
+  maxAmount?: string | StringFieldUpdateOperationsInput
   phone?: string | StringFieldUpdateOperationsInput
   createdAt?: Date | string | DateTimeFieldUpdateOperationsInput
 }
 
 export type WatchSymbolsUpdateManyDataInput = {
   symbol?: string | StringFieldUpdateOperationsInput
-  amount?: string | StringFieldUpdateOperationsInput
+  minAmount?: string | StringFieldUpdateOperationsInput
+  maxAmount?: string | StringFieldUpdateOperationsInput
   phone?: string | StringFieldUpdateOperationsInput
   createdAt?: Date | string | DateTimeFieldUpdateOperationsInput
 }

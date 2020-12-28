@@ -39,7 +39,8 @@ model User {
 model WatchSymbols {
     id          Int          @id @default(autoincrement())
     symbol      String
-    amount      String       @default("")
+    minAmount      String       @default("")
+    maxAmount      String       @default("")
     phone       String       @default("")
     createdAt   DateTime     @default(now())
     postedById  Int?
@@ -50,8 +51,7 @@ model WatchSymbols {
 
 model sms {
     id          Int          @id @default(autoincrement())
-    symbol      String
-    amount      String       @default("")
+    msg         String       @default("")
     phone       String       @default("")
     createdAt   DateTime     @default(now())
     sent        Boolean      @default(false)

@@ -68,7 +68,7 @@ async function removeWatchSymbol(prisma, userId, symbol) {
   return symbols.map(symbol => symbol.symbol);
 
 }
-async function addWatchSymbol(prisma, userId, symbol,amount,phone) {
+async function addWatchSymbol(prisma, userId, symbol,minAmount,maxAmount,phone) {
 
   var data = await prisma.watchSymbols.findMany({
     where: {
@@ -81,7 +81,8 @@ async function addWatchSymbol(prisma, userId, symbol,amount,phone) {
       data: {
         postedBy: { connect: { id: userId } },
         symbol: symbol,
-        amount: amount,
+        minAmount: minAmount,
+        maxAmount: maxAmount,
         phone: phone,
 
 
@@ -96,7 +97,8 @@ async function addWatchSymbol(prisma, userId, symbol,amount,phone) {
 async function switchWatchSymbol(parent, args, context, info) { //if symbol already exists in watch symbols then it will remove/ other wise this will add
   const userId = getUserId(context);
   const symbol = args.symbol;
-  const amount = args.amount;
+  const minAmount = args.minAmount;
+  const maxAmount = args.maxAmount;
   const phone = args.phone;
 
   var data = await context.prisma.watchSymbols.findMany({
@@ -106,7 +108,7 @@ async function switchWatchSymbol(parent, args, context, info) { //if symbol alre
     }
   });
   if (!data.length) { //add watch symbol
-    return await addWatchSymbol(context.prisma, userId, symbol,amount,phone);
+    return await addWatchSymbol(context.prisma, userId, symbol,minAmount,maxAmount,phone);
   } else {
     return await removeWatchSymbol(context.prisma, userId, symbol);
   }
