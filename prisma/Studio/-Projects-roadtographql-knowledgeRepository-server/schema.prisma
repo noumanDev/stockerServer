@@ -55,5 +55,6 @@ model sms {
     phone       String       @default("")
     createdAt   DateTime     @default(now())
     sent        Boolean      @default(false)
+    status      String       @default("PENDING")
     onceDaily   String       @unique
 }

@@ -6,7 +6,7 @@ const { convertArrayToObject } = require("../utils");
 //https://www.digitalocean.com/community/tutorials/nodejs-cron-jobs-by-examples
 const schedulesms = (prisma, cache) => {
   cron.schedule("* * * * *", async function() {
-    console.log("running a task every minute");
+    console.log("running a schedule sms task every minute");
 
     //fetch latest psx data
     const psxData = await fetchPsxData(cache);

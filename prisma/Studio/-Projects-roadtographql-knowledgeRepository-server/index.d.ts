@@ -498,6 +498,7 @@ export declare const SmsDistinctFieldEnum: {
   phone: 'phone',
   createdAt: 'createdAt',
   sent: 'sent',
+  status: 'status',
   onceDaily: 'onceDaily'
 };
 
@@ -2653,6 +2654,7 @@ export type sms = {
   phone: string
   createdAt: Date
   sent: boolean
+  status: string
   onceDaily: string
 }
 
@@ -2728,6 +2730,7 @@ export type smsSelect = {
   phone?: boolean
   createdAt?: boolean
   sent?: boolean
+  status?: boolean
   onceDaily?: boolean
 }
 
@@ -3236,6 +3239,7 @@ export type smsWhereInput = {
   phone?: StringFilter | string
   createdAt?: DateTimeFilter | Date | string
   sent?: BoolFilter | boolean
+  status?: StringFilter | string
   onceDaily?: StringFilter | string
 }
 
@@ -3245,6 +3249,7 @@ export type smsOrderByInput = {
   phone?: SortOrder
   createdAt?: SortOrder
   sent?: SortOrder
+  status?: SortOrder
   onceDaily?: SortOrder
 }
 
@@ -3342,6 +3347,7 @@ export type smsCreateInput = {
   phone?: string
   createdAt?: Date | string
   sent?: boolean
+  status?: string
   onceDaily: string
 }
 
@@ -3350,6 +3356,7 @@ export type smsUpdateInput = {
   phone?: string | StringFieldUpdateOperationsInput
   createdAt?: Date | string | DateTimeFieldUpdateOperationsInput
   sent?: boolean | BoolFieldUpdateOperationsInput
+  status?: string | StringFieldUpdateOperationsInput
   onceDaily?: string | StringFieldUpdateOperationsInput
 }
 
@@ -3358,6 +3365,7 @@ export type smsUpdateManyMutationInput = {
   phone?: string | StringFieldUpdateOperationsInput
   createdAt?: Date | string | DateTimeFieldUpdateOperationsInput
   sent?: boolean | BoolFieldUpdateOperationsInput
+  status?: string | StringFieldUpdateOperationsInput
   onceDaily?: string | StringFieldUpdateOperationsInput
 }
 
