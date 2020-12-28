@@ -49,7 +49,7 @@ model WatchSymbols {
 }
 
 
-model sms {
+model notification {
     id          Int          @id @default(autoincrement())
     msg         String       @default("")
     phone       String       @default("")

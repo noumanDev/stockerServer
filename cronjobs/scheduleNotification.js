@@ -4,9 +4,9 @@ const { convertArrayToObject } = require("../utils");
 
 // Schedule tasks to be run on the server.
 //https://www.digitalocean.com/community/tutorials/nodejs-cron-jobs-by-examples
-const schedulesms = (prisma, cache) => {
+const scheduleNotification = (prisma, cache) => {
   cron.schedule("* * * * *", async function() {
-    console.log("running a schedule sms task every minute");
+    console.log("running a schedule notification task every minute");
 
     //fetch latest psx data
     const psxData = await fetchPsxData(cache);
@@ -17,7 +17,7 @@ const schedulesms = (prisma, cache) => {
     // get all users watch symbols
     const data = await getWatchSymbols(null, null, { prisma, allUsers: true });
 
-    //if some or any watch symbol alert amount range fall in latest psx data, then add its record to sms alerts table, so that msgs sent to those users
+    //if some or any watch symbol alert amount range fall in latest psx data, then add its record to notification alerts table, so that msgs sent to those users
     for (var i = 0; i < data.length; i++) {
       var element = data[i];
       var currentAmount = psxDataObj[element.symbol].current;
@@ -35,7 +35,7 @@ const schedulesms = (prisma, cache) => {
         currentAmount <= element.maxAmount
       ) {
         try {
-          await prisma.sms.create({
+          await prisma.notification.create({
             data: {
               msg: `${element.symbol} todays price is ${currentAmount}. Alert was set for range ${element.minAmount} - ${element.maxAmount}`,
               phone: element.phone,
@@ -50,4 +50,4 @@ const schedulesms = (prisma, cache) => {
   });
 };
 
-module.exports = schedulesms;
+module.exports = scheduleNotification;

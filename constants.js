@@ -1,8 +1,8 @@
-const SMS_STATUSES = {
+const NOTIFICATION_STATUS = {
     PENDING : "PENDING",
     SUCCESS : "SUCCESS",
     FAILED : "FAILED"
 }
 module.exports = {
-    SMS_STATUSES
+    NOTIFICATION_STATUS
 }

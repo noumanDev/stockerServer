@@ -430,14 +430,14 @@ export declare class PrismaClient<
   get watchSymbols(): WatchSymbolsDelegate;
 
   /**
-   * `prisma.sms`: Exposes CRUD operations for the **sms** model.
+   * `prisma.notification`: Exposes CRUD operations for the **notification** model.
     * Example usage:
     * ```ts
-    * // Fetch zero or more Sms
-    * const sms = await prisma.sms.findMany()
+    * // Fetch zero or more Notifications
+    * const notifications = await prisma.notification.findMany()
     * ```
     */
-  get sms(): smsDelegate;
+  get notification(): notificationDelegate;
 }
 
 
@@ -492,7 +492,7 @@ export declare const WatchSymbolsDistinctFieldEnum: {
 export declare type WatchSymbolsDistinctFieldEnum = (typeof WatchSymbolsDistinctFieldEnum)[keyof typeof WatchSymbolsDistinctFieldEnum]
 
 
-export declare const SmsDistinctFieldEnum: {
+export declare const NotificationDistinctFieldEnum: {
   id: 'id',
   msg: 'msg',
   phone: 'phone',
@@ -502,7 +502,7 @@ export declare const SmsDistinctFieldEnum: {
   onceDaily: 'onceDaily'
 };
 
-export declare type SmsDistinctFieldEnum = (typeof SmsDistinctFieldEnum)[keyof typeof SmsDistinctFieldEnum]
+export declare type NotificationDistinctFieldEnum = (typeof NotificationDistinctFieldEnum)[keyof typeof NotificationDistinctFieldEnum]
 
 
 export declare const SortOrder: {
@@ -2645,10 +2645,10 @@ export type WatchSymbolsArgs = {
 
 
 /**
- * Model sms
+ * Model notification
  */
 
-export type sms = {
+export type notification = {
   id: number
   msg: string
   phone: string
@@ -2659,72 +2659,72 @@ export type sms = {
 }
 
 
-export type AggregateSms = {
+export type AggregateNotification = {
   count: number
-  avg: SmsAvgAggregateOutputType | null
-  sum: SmsSumAggregateOutputType | null
-  min: SmsMinAggregateOutputType | null
-  max: SmsMaxAggregateOutputType | null
+  avg: NotificationAvgAggregateOutputType | null
+  sum: NotificationSumAggregateOutputType | null
+  min: NotificationMinAggregateOutputType | null
+  max: NotificationMaxAggregateOutputType | null
 }
 
-export type SmsAvgAggregateOutputType = {
+export type NotificationAvgAggregateOutputType = {
   id: number
 }
 
-export type SmsSumAggregateOutputType = {
+export type NotificationSumAggregateOutputType = {
   id: number
 }
 
-export type SmsMinAggregateOutputType = {
+export type NotificationMinAggregateOutputType = {
   id: number
 }
 
-export type SmsMaxAggregateOutputType = {
+export type NotificationMaxAggregateOutputType = {
   id: number
 }
 
 
-export type SmsAvgAggregateInputType = {
+export type NotificationAvgAggregateInputType = {
   id?: true
 }
 
-export type SmsSumAggregateInputType = {
+export type NotificationSumAggregateInputType = {
   id?: true
 }
 
-export type SmsMinAggregateInputType = {
+export type NotificationMinAggregateInputType = {
   id?: true
 }
 
-export type SmsMaxAggregateInputType = {
+export type NotificationMaxAggregateInputType = {
   id?: true
 }
 
-export type AggregateSmsArgs = {
-  where?: smsWhereInput
-  orderBy?: Enumerable<smsOrderByInput> | smsOrderByInput
-  cursor?: smsWhereUniqueInput
+export type AggregateNotificationArgs = {
+  where?: notificationWhereInput
+  orderBy?: Enumerable<notificationOrderByInput> | notificationOrderByInput
+  cursor?: notificationWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Enumerable<SmsDistinctFieldEnum>
+  distinct?: Enumerable<NotificationDistinctFieldEnum>
   count?: true
-  avg?: SmsAvgAggregateInputType
-  sum?: SmsSumAggregateInputType
-  min?: SmsMinAggregateInputType
-  max?: SmsMaxAggregateInputType
+  avg?: NotificationAvgAggregateInputType
+  sum?: NotificationSumAggregateInputType
+  min?: NotificationMinAggregateInputType
+  max?: NotificationMaxAggregateInputType
 }
 
-export type GetSmsAggregateType<T extends AggregateSmsArgs> = {
-  [P in keyof T]: P extends 'count' ? number : GetSmsAggregateScalarType<T[P]>
+export type GetNotificationAggregateType<T extends AggregateNotificationArgs> = {
+  [P in keyof T]: P extends 'count' ? number : GetNotificationAggregateScalarType<T[P]>
 }
 
-export type GetSmsAggregateScalarType<T extends any> = {
-  [P in keyof T]: P extends keyof SmsAvgAggregateOutputType ? SmsAvgAggregateOutputType[P] : never
+export type GetNotificationAggregateScalarType<T extends any> = {
+  [P in keyof T]: P extends keyof NotificationAvgAggregateOutputType ? NotificationAvgAggregateOutputType[P] : never
 }
     
     
 
-export type smsSelect = {
+export type notificationSelect = {
   id?: boolean
   msg?: boolean
   phone?: boolean
@@ -2734,108 +2734,108 @@ export type smsSelect = {
   onceDaily?: boolean
 }
 
-export type smsGetPayload<
-  S extends boolean | null | undefined | smsArgs,
+export type notificationGetPayload<
+  S extends boolean | null | undefined | notificationArgs,
   U = keyof S
 > = S extends true
-  ? sms
+  ? notification
   : S extends undefined
   ? never
-  : S extends smsArgs | FindManysmsArgs
+  : S extends notificationArgs | FindManynotificationArgs
   ? 'include' extends U
-    ? sms 
+    ? notification 
   : 'select' extends U
     ? {
-      [P in TrueKeys<S['select']>]:P extends keyof sms ? sms[P]
+      [P in TrueKeys<S['select']>]:P extends keyof notification ? notification[P]
 : 
  never
     }
-  : sms
-: sms
+  : notification
+: notification
 
 
-export interface smsDelegate {
+export interface notificationDelegate {
   /**
-   * Find zero or one Sms that matches the filter.
-   * @param {FindOnesmsArgs} args - Arguments to find a Sms
+   * Find zero or one Notification that matches the filter.
+   * @param {FindOnenotificationArgs} args - Arguments to find a Notification
    * @example
-   * // Get one Sms
-   * const sms = await prisma.sms.findOne({
+   * // Get one Notification
+   * const notification = await prisma.notification.findOne({
    *   where: {
    *     // ... provide filter here
    *   }
    * })
   **/
-  findOne<T extends FindOnesmsArgs>(
-    args: Subset<T, FindOnesmsArgs>
-  ): CheckSelect<T, Prisma__smsClient<sms | null>, Prisma__smsClient<smsGetPayload<T> | null>>
+  findOne<T extends FindOnenotificationArgs>(
+    args: Subset<T, FindOnenotificationArgs>
+  ): CheckSelect<T, Prisma__notificationClient<notification | null>, Prisma__notificationClient<notificationGetPayload<T> | null>>
   /**
-   * Find the first Sms that matches the filter.
-   * @param {FindFirstsmsArgs} args - Arguments to find a Sms
+   * Find the first Notification that matches the filter.
+   * @param {FindFirstnotificationArgs} args - Arguments to find a Notification
    * @example
-   * // Get one Sms
-   * const sms = await prisma.sms.findFirst({
+   * // Get one Notification
+   * const notification = await prisma.notification.findFirst({
    *   where: {
    *     // ... provide filter here
    *   }
    * })
   **/
-  findFirst<T extends FindFirstsmsArgs>(
-    args: Subset<T, FindFirstsmsArgs>
-  ): CheckSelect<T, Prisma__smsClient<sms>, Prisma__smsClient<smsGetPayload<T>>>
+  findFirst<T extends FindFirstnotificationArgs>(
+    args: Subset<T, FindFirstnotificationArgs>
+  ): CheckSelect<T, Prisma__notificationClient<notification>, Prisma__notificationClient<notificationGetPayload<T>>>
   /**
-   * Find zero or more Sms that matches the filter.
-   * @param {FindManysmsArgs=} args - Arguments to filter and select certain fields only.
+   * Find zero or more Notifications that matches the filter.
+   * @param {FindManynotificationArgs=} args - Arguments to filter and select certain fields only.
    * @example
-   * // Get all Sms
-   * const sms = await prisma.sms.findMany()
+   * // Get all Notifications
+   * const notifications = await prisma.notification.findMany()
    * 
-   * // Get first 10 Sms
-   * const sms = await prisma.sms.findMany({ take: 10 })
+   * // Get first 10 Notifications
+   * const notifications = await prisma.notification.findMany({ take: 10 })
    * 
    * // Only select the `id`
-   * const smsWithIdOnly = await prisma.sms.findMany({ select: { id: true } })
+   * const notificationWithIdOnly = await prisma.notification.findMany({ select: { id: true } })
    * 
   **/
-  findMany<T extends FindManysmsArgs>(
-    args?: Subset<T, FindManysmsArgs>
-  ): CheckSelect<T, Promise<Array<sms>>, Promise<Array<smsGetPayload<T>>>>
+  findMany<T extends FindManynotificationArgs>(
+    args?: Subset<T, FindManynotificationArgs>
+  ): CheckSelect<T, Promise<Array<notification>>, Promise<Array<notificationGetPayload<T>>>>
   /**
-   * Create a Sms.
-   * @param {smsCreateArgs} args - Arguments to create a Sms.
+   * Create a Notification.
+   * @param {notificationCreateArgs} args - Arguments to create a Notification.
    * @example
-   * // Create one Sms
-   * const Sms = await prisma.sms.create({
+   * // Create one Notification
+   * const Notification = await prisma.notification.create({
    *   data: {
-   *     // ... data to create a Sms
+   *     // ... data to create a Notification
    *   }
    * })
    * 
   **/
-  create<T extends smsCreateArgs>(
-    args: Subset<T, smsCreateArgs>
-  ): CheckSelect<T, Prisma__smsClient<sms>, Prisma__smsClient<smsGetPayload<T>>>
+  create<T extends notificationCreateArgs>(
+    args: Subset<T, notificationCreateArgs>
+  ): CheckSelect<T, Prisma__notificationClient<notification>, Prisma__notificationClient<notificationGetPayload<T>>>
   /**
-   * Delete a Sms.
-   * @param {smsDeleteArgs} args - Arguments to delete one Sms.
+   * Delete a Notification.
+   * @param {notificationDeleteArgs} args - Arguments to delete one Notification.
    * @example
-   * // Delete one Sms
-   * const Sms = await prisma.sms.delete({
+   * // Delete one Notification
+   * const Notification = await prisma.notification.delete({
    *   where: {
-   *     // ... filter to delete one Sms
+   *     // ... filter to delete one Notification
    *   }
    * })
    * 
   **/
-  delete<T extends smsDeleteArgs>(
-    args: Subset<T, smsDeleteArgs>
-  ): CheckSelect<T, Prisma__smsClient<sms>, Prisma__smsClient<smsGetPayload<T>>>
+  delete<T extends notificationDeleteArgs>(
+    args: Subset<T, notificationDeleteArgs>
+  ): CheckSelect<T, Prisma__notificationClient<notification>, Prisma__notificationClient<notificationGetPayload<T>>>
   /**
-   * Update one Sms.
-   * @param {smsUpdateArgs} args - Arguments to update one Sms.
+   * Update one Notification.
+   * @param {notificationUpdateArgs} args - Arguments to update one Notification.
    * @example
-   * // Update one Sms
-   * const sms = await prisma.sms.update({
+   * // Update one Notification
+   * const notification = await prisma.notification.update({
    *   where: {
    *     // ... provide filter here
    *   },
@@ -2845,30 +2845,30 @@ export interface smsDelegate {
    * })
    * 
   **/
-  update<T extends smsUpdateArgs>(
-    args: Subset<T, smsUpdateArgs>
-  ): CheckSelect<T, Prisma__smsClient<sms>, Prisma__smsClient<smsGetPayload<T>>>
+  update<T extends notificationUpdateArgs>(
+    args: Subset<T, notificationUpdateArgs>
+  ): CheckSelect<T, Prisma__notificationClient<notification>, Prisma__notificationClient<notificationGetPayload<T>>>
   /**
-   * Delete zero or more Sms.
-   * @param {smsDeleteManyArgs} args - Arguments to filter Sms to delete.
+   * Delete zero or more Notifications.
+   * @param {notificationDeleteManyArgs} args - Arguments to filter Notifications to delete.
    * @example
-   * // Delete a few Sms
-   * const { count } = await prisma.sms.deleteMany({
+   * // Delete a few Notifications
+   * const { count } = await prisma.notification.deleteMany({
    *   where: {
    *     // ... provide filter here
    *   }
    * })
    * 
   **/
-  deleteMany<T extends smsDeleteManyArgs>(
-    args: Subset<T, smsDeleteManyArgs>
+  deleteMany<T extends notificationDeleteManyArgs>(
+    args: Subset<T, notificationDeleteManyArgs>
   ): Promise<BatchPayload>
   /**
-   * Update zero or more Sms.
-   * @param {smsUpdateManyArgs} args - Arguments to update one or more rows.
+   * Update zero or more Notifications.
+   * @param {notificationUpdateManyArgs} args - Arguments to update one or more rows.
    * @example
-   * // Update many Sms
-   * const sms = await prisma.sms.updateMany({
+   * // Update many Notifications
+   * const notification = await prisma.notification.updateMany({
    *   where: {
    *     // ... provide filter here
    *   },
@@ -2878,47 +2878,47 @@ export interface smsDelegate {
    * })
    * 
   **/
-  updateMany<T extends smsUpdateManyArgs>(
-    args: Subset<T, smsUpdateManyArgs>
+  updateMany<T extends notificationUpdateManyArgs>(
+    args: Subset<T, notificationUpdateManyArgs>
   ): Promise<BatchPayload>
   /**
-   * Create or update one Sms.
-   * @param {smsUpsertArgs} args - Arguments to update or create a Sms.
+   * Create or update one Notification.
+   * @param {notificationUpsertArgs} args - Arguments to update or create a Notification.
    * @example
-   * // Update or create a Sms
-   * const sms = await prisma.sms.upsert({
+   * // Update or create a Notification
+   * const notification = await prisma.notification.upsert({
    *   create: {
-   *     // ... data to create a Sms
+   *     // ... data to create a Notification
    *   },
    *   update: {
    *     // ... in case it already exists, update
    *   },
    *   where: {
-   *     // ... the filter for the Sms we want to update
+   *     // ... the filter for the Notification we want to update
    *   }
    * })
   **/
-  upsert<T extends smsUpsertArgs>(
-    args: Subset<T, smsUpsertArgs>
-  ): CheckSelect<T, Prisma__smsClient<sms>, Prisma__smsClient<smsGetPayload<T>>>
+  upsert<T extends notificationUpsertArgs>(
+    args: Subset<T, notificationUpsertArgs>
+  ): CheckSelect<T, Prisma__notificationClient<notification>, Prisma__notificationClient<notificationGetPayload<T>>>
   /**
    * Count
    */
-  count(args?: Omit<FindManysmsArgs, 'select' | 'include'>): Promise<number>
+  count(args?: Omit<FindManynotificationArgs, 'select' | 'include'>): Promise<number>
 
   /**
    * Aggregate
    */
-  aggregate<T extends AggregateSmsArgs>(args: Subset<T, AggregateSmsArgs>): Promise<GetSmsAggregateType<T>>
+  aggregate<T extends AggregateNotificationArgs>(args: Subset<T, AggregateNotificationArgs>): Promise<GetNotificationAggregateType<T>>
 }
 
 /**
- * The delegate class that acts as a "Promise-like" for sms.
+ * The delegate class that acts as a "Promise-like" for notification.
  * Why is this prefixed with `Prisma__`?
  * Because we want to prevent naming conflicts as mentioned in 
  * https://github.com/prisma/prisma-client-js/issues/707
  */
-export declare class Prisma__smsClient<T> implements Promise<T> {
+export declare class Prisma__notificationClient<T> implements Promise<T> {
   private readonly _dmmf;
   private readonly _fetcher;
   private readonly _queryType;
@@ -2961,169 +2961,169 @@ export declare class Prisma__smsClient<T> implements Promise<T> {
 // Custom InputTypes
 
 /**
- * sms findOne
+ * notification findOne
  */
-export type FindOnesmsArgs = {
+export type FindOnenotificationArgs = {
   /**
-   * Select specific fields to fetch from the sms
+   * Select specific fields to fetch from the notification
   **/
-  select?: smsSelect | null
+  select?: notificationSelect | null
   /**
-   * Filter, which sms to fetch.
+   * Filter, which notification to fetch.
   **/
-  where: smsWhereUniqueInput
+  where: notificationWhereUniqueInput
 }
 
 
 /**
- * sms findFirst
+ * notification findFirst
  */
-export type FindFirstsmsArgs = {
+export type FindFirstnotificationArgs = {
   /**
-   * Select specific fields to fetch from the sms
+   * Select specific fields to fetch from the notification
   **/
-  select?: smsSelect | null
+  select?: notificationSelect | null
   /**
-   * Filter, which sms to fetch.
+   * Filter, which notification to fetch.
   **/
-  where?: smsWhereInput
-  orderBy?: Enumerable<smsOrderByInput> | smsOrderByInput
-  cursor?: smsWhereUniqueInput
+  where?: notificationWhereInput
+  orderBy?: Enumerable<notificationOrderByInput> | notificationOrderByInput
+  cursor?: notificationWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Enumerable<SmsDistinctFieldEnum>
+  distinct?: Enumerable<NotificationDistinctFieldEnum>
 }
 
 
 /**
- * sms findMany
+ * notification findMany
  */
-export type FindManysmsArgs = {
+export type FindManynotificationArgs = {
   /**
-   * Select specific fields to fetch from the sms
+   * Select specific fields to fetch from the notification
   **/
-  select?: smsSelect | null
+  select?: notificationSelect | null
   /**
-   * Filter, which sms to fetch.
+   * Filter, which notifications to fetch.
   **/
-  where?: smsWhereInput
+  where?: notificationWhereInput
   /**
-   * Determine the order of the sms to fetch.
+   * Determine the order of the notifications to fetch.
   **/
-  orderBy?: Enumerable<smsOrderByInput> | smsOrderByInput
+  orderBy?: Enumerable<notificationOrderByInput> | notificationOrderByInput
   /**
-   * Sets the position for listing sms.
+   * Sets the position for listing notifications.
   **/
-  cursor?: smsWhereUniqueInput
+  cursor?: notificationWhereUniqueInput
   /**
-   * The number of sms to fetch. If negative number, it will take sms before the `cursor`.
+   * The number of notifications to fetch. If negative number, it will take notifications before the `cursor`.
   **/
   take?: number
   /**
-   * Skip the first `n` sms.
+   * Skip the first `n` notifications.
   **/
   skip?: number
-  distinct?: Enumerable<SmsDistinctFieldEnum>
+  distinct?: Enumerable<NotificationDistinctFieldEnum>
 }
 
 
 /**
- * sms create
+ * notification create
  */
-export type smsCreateArgs = {
+export type notificationCreateArgs = {
   /**
-   * Select specific fields to fetch from the sms
+   * Select specific fields to fetch from the notification
   **/
-  select?: smsSelect | null
+  select?: notificationSelect | null
   /**
-   * The data needed to create a sms.
+   * The data needed to create a notification.
   **/
-  data: smsCreateInput
+  data: notificationCreateInput
 }
 
 
 /**
- * sms update
+ * notification update
  */
-export type smsUpdateArgs = {
+export type notificationUpdateArgs = {
   /**
-   * Select specific fields to fetch from the sms
+   * Select specific fields to fetch from the notification
   **/
-  select?: smsSelect | null
+  select?: notificationSelect | null
   /**
-   * The data needed to update a sms.
+   * The data needed to update a notification.
   **/
-  data: smsUpdateInput
+  data: notificationUpdateInput
   /**
-   * Choose, which sms to update.
+   * Choose, which notification to update.
   **/
-  where: smsWhereUniqueInput
+  where: notificationWhereUniqueInput
 }
 
 
 /**
- * sms updateMany
+ * notification updateMany
  */
-export type smsUpdateManyArgs = {
-  data: smsUpdateManyMutationInput
-  where?: smsWhereInput
+export type notificationUpdateManyArgs = {
+  data: notificationUpdateManyMutationInput
+  where?: notificationWhereInput
 }
 
 
 /**
- * sms upsert
+ * notification upsert
  */
-export type smsUpsertArgs = {
+export type notificationUpsertArgs = {
   /**
-   * Select specific fields to fetch from the sms
+   * Select specific fields to fetch from the notification
   **/
-  select?: smsSelect | null
+  select?: notificationSelect | null
   /**
-   * The filter to search for the sms to update in case it exists.
+   * The filter to search for the notification to update in case it exists.
   **/
-  where: smsWhereUniqueInput
+  where: notificationWhereUniqueInput
   /**
-   * In case the sms found by the `where` argument doesn't exist, create a new sms with this data.
+   * In case the notification found by the `where` argument doesn't exist, create a new notification with this data.
   **/
-  create: smsCreateInput
+  create: notificationCreateInput
   /**
-   * In case the sms was found with the provided `where` argument, update it with this data.
+   * In case the notification was found with the provided `where` argument, update it with this data.
   **/
-  update: smsUpdateInput
+  update: notificationUpdateInput
 }
 
 
 /**
- * sms delete
+ * notification delete
  */
-export type smsDeleteArgs = {
+export type notificationDeleteArgs = {
   /**
-   * Select specific fields to fetch from the sms
+   * Select specific fields to fetch from the notification
   **/
-  select?: smsSelect | null
+  select?: notificationSelect | null
   /**
-   * Filter which sms to delete.
+   * Filter which notification to delete.
   **/
-  where: smsWhereUniqueInput
+  where: notificationWhereUniqueInput
 }
 
 
 /**
- * sms deleteMany
+ * notification deleteMany
  */
-export type smsDeleteManyArgs = {
-  where?: smsWhereInput
+export type notificationDeleteManyArgs = {
+  where?: notificationWhereInput
 }
 
 
 /**
- * sms without action
+ * notification without action
  */
-export type smsArgs = {
+export type notificationArgs = {
   /**
-   * Select specific fields to fetch from the sms
+   * Select specific fields to fetch from the notification
   **/
-  select?: smsSelect | null
+  select?: notificationSelect | null
 }
 
 
@@ -3230,10 +3230,10 @@ export type WatchSymbolsWhereUniqueInput = {
   id?: number
 }
 
-export type smsWhereInput = {
-  AND?: smsWhereInput | Enumerable<smsWhereInput>
-  OR?: smsWhereInput | Enumerable<smsWhereInput>
-  NOT?: smsWhereInput | Enumerable<smsWhereInput>
+export type notificationWhereInput = {
+  AND?: notificationWhereInput | Enumerable<notificationWhereInput>
+  OR?: notificationWhereInput | Enumerable<notificationWhereInput>
+  NOT?: notificationWhereInput | Enumerable<notificationWhereInput>
   id?: IntFilter | number
   msg?: StringFilter | string
   phone?: StringFilter | string
@@ -3243,7 +3243,7 @@ export type smsWhereInput = {
   onceDaily?: StringFilter | string
 }
 
-export type smsOrderByInput = {
+export type notificationOrderByInput = {
   id?: SortOrder
   msg?: SortOrder
   phone?: SortOrder
@@ -3253,7 +3253,7 @@ export type smsOrderByInput = {
   onceDaily?: SortOrder
 }
 
-export type smsWhereUniqueInput = {
+export type notificationWhereUniqueInput = {
   id?: number
   onceDaily?: string
 }
@@ -3342,7 +3342,7 @@ export type WatchSymbolsUpdateManyMutationInput = {
   createdAt?: Date | string | DateTimeFieldUpdateOperationsInput
 }
 
-export type smsCreateInput = {
+export type notificationCreateInput = {
   msg?: string
   phone?: string
   createdAt?: Date | string
@@ -3351,7 +3351,7 @@ export type smsCreateInput = {
   onceDaily: string
 }
 
-export type smsUpdateInput = {
+export type notificationUpdateInput = {
   msg?: string | StringFieldUpdateOperationsInput
   phone?: string | StringFieldUpdateOperationsInput
   createdAt?: Date | string | DateTimeFieldUpdateOperationsInput
@@ -3360,7 +3360,7 @@ export type smsUpdateInput = {
   onceDaily?: string | StringFieldUpdateOperationsInput
 }
 
-export type smsUpdateManyMutationInput = {
+export type notificationUpdateManyMutationInput = {
   msg?: string | StringFieldUpdateOperationsInput
   phone?: string | StringFieldUpdateOperationsInput
   createdAt?: Date | string | DateTimeFieldUpdateOperationsInput

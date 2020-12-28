@@ -7,14 +7,14 @@ const User = require('./resolvers/User');
 const Lesson = require('./resolvers/Lesson');
 const graphQLSchema = require('./schema.graphql.js');
 const NodeCache = require( "node-cache" );
-const schedulesms = require('./cronjobs/schedulesms');
-const sendsms = require('./cronjobs/sendsms');
+const scheduleNotification = require('./cronjobs/scheduleNotification');
+const sendNotification = require('./cronjobs/sendNotification');
 
 const myCache = new NodeCache();
 
 const prisma = new PrismaClient();
-schedulesms(prisma,myCache);
-sendsms(prisma);
+scheduleNotification(prisma,myCache);
+sendNotification(prisma);
 
 const test = () => {
 
