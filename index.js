@@ -9,6 +9,8 @@ const graphQLSchema = require('./schema.graphql.js');
 const NodeCache = require( "node-cache" );
 const scheduleNotification = require('./cronjobs/scheduleNotification');
 const sendNotification = require('./cronjobs/sendNotification');
+const cors = require('cors')
+const webpush = require('web-push')
 
 const myCache = new NodeCache();
 
