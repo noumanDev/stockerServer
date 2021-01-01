@@ -1,6 +1,9 @@
-const { getUserId } = require('../utils');
-const { scrapePsxMarketWatch,psxSymbolStats } = require('./../scrapping/index');
-const _ = require('lodash');
+const { getUserId } = require("../utils");
+const {
+  scrapePsxMarketWatch,
+  psxSymbolStats
+} = require("./../scrapping/index");
+const _ = require("lodash");
 
 async function lessons(parent, args, context) {
   const userId = getUserId(context);
@@ -9,46 +12,61 @@ async function lessons(parent, args, context) {
 
 async function getWatchSymbols(parent, args, context) {
   const symbols = await context.prisma.watchSymbols.findMany({
-    where: {
-      postedById: getUserId(context)
-    }
+    where: context.allUsers
+      ? {}
+      : {
+          postedById: getUserId(context)
+        }
   });
-  return symbols.map(symbol => symbol.symbol);
+  return symbols.map(symbol => symbol);
 }
 
+async function fetchPsxData(cache) {
+  //fetch psx data
+  var psxMarketWatchKey = "psxMarketWatch";
+  var data = cache.get(psxMarketWatchKey);
+  if (data == undefined) {
+    data = await scrapePsxMarketWatch();
+    cache.set(psxMarketWatchKey, data, 60000);
+  }
+  return data;
+}
 
 async function psxMarketWatch(parent, args, context) {
 
-  //fetch psx data
-  var psxMarketWatchKey = "psxMarketWatch";
-  var data = context.myCache.get(psxMarketWatchKey);
-  if (data == undefined) {
-    data = await scrapePsxMarketWatch();
-    context.myCache.set(psxMarketWatchKey,data,60000);
-  }
+  const data = await fetchPsxData(context.myCache);
 
   //fetch symbols
   var watchSymbols = {};
-  (await getWatchSymbols(parent, args, context)).forEach(symbol => watchSymbols[symbol] = symbol);
+  (await getWatchSymbols(parent, args, context)).forEach(
+    symbol => (watchSymbols[symbol.symbol] = symbol)
+  );
 
   //combile watch symbols with psx data
   data.forEach(symbol => {
     console.log(symbol.symbol, watchSymbols[symbol.symbol]);
-    symbol.watch = (watchSymbols[symbol.symbol] ? true : false);
+    symbol.watch = watchSymbols[symbol.symbol] ? true : false;
+    symbol.minAmount = watchSymbols[symbol.symbol]
+      ? watchSymbols[symbol.symbol].minAmount
+      : null;
+    symbol.maxAmount = watchSymbols[symbol.symbol]
+      ? watchSymbols[symbol.symbol].maxAmount
+      : null;
+    symbol.phone = watchSymbols[symbol.symbol]
+      ? watchSymbols[symbol.symbol].phone
+      : null;
   });
 
-
   //sort according to watch symbols
-  return _.sortBy(data,[(w)=>!w.watch,(w)=>!w.volume]);
+  return _.sortBy(data, [w => !w.watch, w => !w.volume]);
 }
 async function getPsxSymbolStats(parent, args, context) {
-
   //fetch psx data
-  var psxSymbolStatsKey = "psxSymbolStats"+args.symbol+args.todayOnly;
+  var psxSymbolStatsKey = "psxSymbolStats" + args.symbol + args.todayOnly;
   var data = context.myCache.get(psxSymbolStatsKey);
   if (data == undefined) {
-    data = await psxSymbolStats({today:args.todayOnly,symbol:args.symbol});
-    context.myCache.set(psxSymbolStatsKey,data,60000);
+    data = await psxSymbolStats({ today: args.todayOnly, symbol: args.symbol });
+    context.myCache.set(psxSymbolStatsKey, data, 60000);
   }
 
   return data;
@@ -58,12 +76,12 @@ async function info(parent, args, context) {
   return "Welcome to Knowledge Repository";
 }
 
-
 module.exports = {
   info,
   lessons,
 
   psxMarketWatch,
   getWatchSymbols,
-  getPsxSymbolStats
+  getPsxSymbolStats,
+  fetchPsxData
 };

@@ -458,6 +458,102 @@
     {
       "tag": "CreateField",
       "model": "WatchSymbols",
+      "field": "minAmount",
+      "type": "String",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "WatchSymbols",
+          "field": "minAmount"
+        },
+        "directive": "default"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "WatchSymbols",
+          "field": "minAmount"
+        },
+        "directive": "default"
+      },
+      "argument": "",
+      "value": "\"\""
+    },
+    {
+      "tag": "CreateField",
+      "model": "WatchSymbols",
+      "field": "maxAmount",
+      "type": "String",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "WatchSymbols",
+          "field": "maxAmount"
+        },
+        "directive": "default"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "WatchSymbols",
+          "field": "maxAmount"
+        },
+        "directive": "default"
+      },
+      "argument": "",
+      "value": "\"\""
+    },
+    {
+      "tag": "CreateField",
+      "model": "WatchSymbols",
+      "field": "phone",
+      "type": "String",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "WatchSymbols",
+          "field": "phone"
+        },
+        "directive": "default"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "WatchSymbols",
+          "field": "phone"
+        },
+        "directive": "default"
+      },
+      "argument": "",
+      "value": "\"\""
+    },
+    {
+      "tag": "CreateField",
+      "model": "WatchSymbols",
       "field": "createdAt",
       "type": "DateTime",
       "arity": "Required"
@@ -539,6 +635,231 @@
       },
       "argument": "references",
       "value": "[id]"
+    },
+    {
+      "tag": "CreateModel",
+      "model": "notification"
+    },
+    {
+      "tag": "CreateField",
+      "model": "notification",
+      "field": "id",
+      "type": "Int",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "notification",
+          "field": "id"
+        },
+        "directive": "id"
+      }
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "notification",
+          "field": "id"
+        },
+        "directive": "default"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "notification",
+          "field": "id"
+        },
+        "directive": "default"
+      },
+      "argument": "",
+      "value": "autoincrement()"
+    },
+    {
+      "tag": "CreateField",
+      "model": "notification",
+      "field": "msg",
+      "type": "String",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "notification",
+          "field": "msg"
+        },
+        "directive": "default"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "notification",
+          "field": "msg"
+        },
+        "directive": "default"
+      },
+      "argument": "",
+      "value": "\"\""
+    },
+    {
+      "tag": "CreateField",
+      "model": "notification",
+      "field": "phone",
+      "type": "String",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "notification",
+          "field": "phone"
+        },
+        "directive": "default"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "notification",
+          "field": "phone"
+        },
+        "directive": "default"
+      },
+      "argument": "",
+      "value": "\"\""
+    },
+    {
+      "tag": "CreateField",
+      "model": "notification",
+      "field": "createdAt",
+      "type": "DateTime",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "notification",
+          "field": "createdAt"
+        },
+        "directive": "default"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "notification",
+          "field": "createdAt"
+        },
+        "directive": "default"
+      },
+      "argument": "",
+      "value": "now()"
+    },
+    {
+      "tag": "CreateField",
+      "model": "notification",
+      "field": "sent",
+      "type": "Boolean",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "notification",
+          "field": "sent"
+        },
+        "directive": "default"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "notification",
+          "field": "sent"
+        },
+        "directive": "default"
+      },
+      "argument": "",
+      "value": "false"
+    },
+    {
+      "tag": "CreateField",
+      "model": "notification",
+      "field": "status",
+      "type": "String",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "notification",
+          "field": "status"
+        },
+        "directive": "default"
+      }
+    },
+    {
+      "tag": "CreateArgument",
+      "location": {
+        "tag": "Directive",
+        "path": {
+          "tag": "Field",
+          "model": "notification",
+          "field": "status"
+        },
+        "directive": "default"
+      },
+      "argument": "",
+      "value": "\"PENDING\""
+    },
+    {
+      "tag": "CreateField",
+      "model": "notification",
+      "field": "onceDaily",
+      "type": "String",
+      "arity": "Required"
+    },
+    {
+      "tag": "CreateDirective",
+      "location": {
+        "path": {
+          "tag": "Field",
+          "model": "notification",
+          "field": "onceDaily"
+        },
+        "directive": "unique"
+      }
     }
   ]
 }

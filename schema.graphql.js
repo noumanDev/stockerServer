@@ -6,6 +6,7 @@ type Query {
   psxMarketWatch : [PsxEntity!]!
   getWatchSymbols : [String!]!
   getPsxSymbolStats(todayOnly:Boolean!,symbol:String!):[[String]]!
+  fetchPsxData:[[PsxEntity]]
   
 }
 
@@ -21,7 +22,10 @@ type PsxEntity {
     change: String!,
     changePercentage: String!,
     volume: String!,
-    watch: Boolean!
+    watch: Boolean!,
+    minAmount: String,
+    maxAmount: String,
+    phone : String
 }
 
 type Mutation {
@@ -29,7 +33,7 @@ type Mutation {
   signup(email: String!, password: String!, name: String!): AuthPayload
   login(email: String!, password: String!): AuthPayload
 
-  switchWatchSymbol(symbol:String!):[String!]!
+  switchWatchSymbol(symbol:String!,minAmount:String!,maxAmount:String!,phone:String!):[String!]!
   
 }
 

@@ -7,12 +7,20 @@ const User = require('./resolvers/User');
 const Lesson = require('./resolvers/Lesson');
 const graphQLSchema = require('./schema.graphql.js');
 const NodeCache = require( "node-cache" );
+const scheduleNotification = require('./cronjobs/scheduleNotification');
+const sendNotification = require('./cronjobs/sendNotification');
+const cors = require('cors')
+const webpush = require('web-push')
 
 const myCache = new NodeCache();
 
 const prisma = new PrismaClient();
+scheduleNotification(prisma,myCache);
+sendNotification(prisma);
 
 const test = () => {
+
+
   prisma.watchSymbols.delete({
     where: {
       symbol: symbol
