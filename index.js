@@ -1,4 +1,4 @@
-const { ApolloServer, gql } = require('apollo-server');
+//const { ApolloServer, gql } = require('apollo-server');
 
 const { PrismaClient } = require("@prisma/client");
 const Query = require('./resolvers/Query');
@@ -9,8 +9,13 @@ const graphQLSchema = require('./schema.graphql.js');
 const NodeCache = require( "node-cache" );
 const scheduleNotification = require('./cronjobs/scheduleNotification');
 const sendNotification = require('./cronjobs/sendNotification');
-const cors = require('cors')
-const webpush = require('web-push')
+const { ApolloServer } =require('apollo-server-express');
+const express = require('express');
+var cors = require('cors')
+
+var PORT = process.env.PORT || 4000;
+const app = express();
+app.use(cors());
 
 const myCache = new NodeCache();
 
@@ -36,14 +41,6 @@ const resolvers = {
   Lesson
 };
 
-// const server = new GraphQLServer({
-//   typeDefs: "./schema.graphql",
-//   resolvers,
-//   context: request => ({
-//     ...request,
-//     prisma,
-//   }),
-// });
 
 const server = new ApolloServer({
   typeDefs: graphQLSchema,
@@ -54,9 +51,17 @@ const server = new ApolloServer({
     myCache
   })
 });
-server.listen().then(({ url }) => {
-  console.log(`🚀  Server ready at ${url}`);
-});
+
+server.applyMiddleware({app});
 
 
-// server.start(() => console.log("Server is running on http://localhost:4000"));
+app.listen(PORT,() =>
+console.log(`🚀 Server ready at http://localhost:${PORT}${server.graphqlPath}`));
+
+
+// server.listen().then(({ url }) => {
+//   console.log(`🚀  Server ready at ${url}`);
+// });
+
+
+
